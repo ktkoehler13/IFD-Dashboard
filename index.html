@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ithaca Fire Department by the Numbers (draft)</title>
+<style>
+:root{color-scheme:light dark;
+--font-anthropic-sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+--font-anthropic-serif:Georgia,"Times New Roman",serif;
+--cds-font-size-caption:12px;--cds-font-size-body:14px;--cds-font-size-heading:16px;--cds-font-size-title:28px;--cds-font-weight-medium:600;
+--cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:16px;--cds-gap-lg:28px;--cds-pad-xs:4px;--cds-pad-sm:8px;--cds-pad-md:12px;--cds-pad-lg:18px;--cds-radius:8px;--cds-dur-slow:300ms;
+--color-bg:#f6f7f9;--color-panel:#ffffff;--color-fg:#16202b;--color-fg-muted:#5b6673;--color-border-line:#dfe3e8;
+--color-ok:#1d7a46;--color-warn:#9a6200;--color-bad:#b3261e;
+--cds-chart-muted:#aab4bf;--cds-chart-status-critical:#c62828;--cds-chart-reference:#7a8591;--cds-chart-grid:#e8ebef;--cds-chart-axis:#9aa4ae;
+--cds-text-secondary:#5b6673;--cds-surface-popover:#ffffff;--cds-shadow-popover:0 4px 14px rgba(0,0,0,.14);--cds-border:#dfe3e8}
+@media (prefers-color-scheme:dark){:root{--color-bg:#11161c;--color-panel:#1a2129;--color-fg:#e8edf2;--color-fg-muted:#9ba7b4;--color-border-line:#2c3540;
+--color-ok:#5cc489;--color-warn:#f0b54a;--color-bad:#ff7a6e;--cds-chart-muted:#5d6977;--cds-chart-status-critical:#ff6b5e;--cds-chart-reference:#8b96a3;--cds-chart-grid:#26303a;--cds-chart-axis:#5d6977;
+--cds-text-secondary:#9ba7b4;--cds-surface-popover:#222b35;--cds-shadow-popover:0 4px 14px rgba(0,0,0,.5);--cds-border:#2c3540}}
+html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(--font-anthropic-sans);font-size:14px}
+#dash-root{padding:16px clamp(12px,3vw,32px) 40px}
+.dash-skeleton{color:transparent;background:var(--color-border-line);border-radius:4px}
+.ifd b{font-weight:700}
+.ifd-foot{margin-top:28px;color:var(--color-fg-muted);font-size:12px}
+
+
+.ifd{position:relative;font-family:var(--font-anthropic-sans);color:var(--color-fg);max-width:1280px;margin-inline:auto}
+.ifd-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--cds-gap-sm);margin-bottom:var(--cds-gap-xs)}
+.ifd-title{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0}
+.ifd-badge{font-size:var(--cds-font-size-caption);color:var(--color-warn);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:2px var(--cds-pad-sm)}
+.ifd-sub{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);margin:0 0 var(--cds-gap-sm)}
+.ifd-take{font-size:var(--cds-font-size-body);margin:0 0 var(--cds-gap-md);max-width:72ch;line-height:1.5}
+.ifd-tabs{display:flex;flex-wrap:wrap;gap:var(--cds-gap-xs);border-bottom:1px solid var(--color-border-line);margin-bottom:var(--cds-gap-md)}
+.ifd-tab{background:none;border:0;border-bottom:2px solid transparent;padding:var(--cds-pad-sm) var(--cds-pad-md);font:inherit;font-size:var(--cds-font-size-body);color:var(--color-fg-muted);cursor:pointer}
+.ifd-tab[aria-selected=true]{color:var(--color-fg);border-bottom-color:var(--color-fg)}
+.ifd-tab.int{font-style:italic}
+.ifd-page[hidden]{display:none}
+.ifd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-md)}
+.ifd-wide{grid-column:1/-1}
+.ifd-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
+.ifd-card h3{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 var(--cds-gap-xs)}
+.ifd-note{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);margin:0 0 var(--cds-gap-sm);line-height:1.45}
+.ifd-sec{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:var(--cds-gap-lg) 0 var(--cds-gap-sm)}
+.ifd-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-md)}
+.ifd-kpi{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-md) var(--cds-pad-lg)}
+.ifd-kpi .lab{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.ifd-kpi .big{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);font-variant-numeric:tabular-nums;margin:var(--cds-gap-xs) 0}
+.ifd-kpi .ctx{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);line-height:1.4}
+.ifd-kpi.counter{border-style:dashed}
+.ifd .bad{color:var(--color-bad)} .ifd .ok{color:var(--color-ok)} .ifd .warn{color:var(--color-warn)}
+.ifd-chart{position:relative;min-height:220px}
+.ifd-chart svg{display:block}
+.ifd-tw{max-height:420px;overflow:auto}
+.ifd table{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-caption);font-variant-numeric:tabular-nums}
+.ifd th{text-align:left;font-weight:var(--cds-font-weight-medium);color:var(--color-fg-muted);padding:var(--cds-pad-xs) var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);position:sticky;top:0;background:var(--color-panel);vertical-align:bottom}
+.ifd td{padding:var(--cds-pad-xs) var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);vertical-align:top}
+.ifd td.num,.ifd th.num{text-align:right}
+#dash-root .ifd table td.own, #dash-root .ifd table td.own b,
+#tbl-unitareas tr[data-key="901"] td:nth-child(2), #tbl-unitareas tr[data-key="902"] td:nth-child(3),
+#tbl-unitareas tr[data-key="903"] td:nth-child(4), #tbl-unitareas tr[data-key="904"] td:nth-child(5),
+#tbl-unitareas tr[data-key="Truck"] td:nth-child(2), #tbl-unitareas tr[data-key="Command"] td:nth-child(2), #tbl-areatypes tr[data-key="All incidents"] td, #tbl-areatypes tr[data-key="% of all incidents"] td {font-weight:700 !important;color:var(--color-fg)}
+.ifd th.sort{cursor:pointer}
+.ifd-cellbar{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.ifd-cellbar i{display:block;height:8px;border-radius:4px;background:var(--cds-chart-muted)}
+.ifd-cellbar i.hi{background:var(--cds-chart-status-critical)}
+.ifd-find{display:grid;gap:var(--cds-gap-sm)}
+.ifd-fgroup h4{font-size:var(--cds-font-size-body);font-weight:var(--cds-font-weight-medium);margin:0 0 var(--cds-gap-xs)}
+.ifd-fgroup table td:first-child{width:7rem;color:var(--color-fg-muted)}
+.ifd-tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:var(--cds-font-size-caption);z-index:5;display:none;max-width:16rem}
+.ifd-tip .t{color:var(--cds-text-secondary)}
+.ifd-legend{display:flex;flex-wrap:wrap;gap:var(--cds-gap-sm);font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-top:var(--cds-gap-xs)}
+.ifd-legend span{display:inline-flex;align-items:center;gap:4px}
+.ifd-legend b{display:inline-block;width:10px;height:10px;border-radius:2px}
+.ifd-sm{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:var(--cds-gap-md)}
+.ifd-sm .ifd-chart{min-height:140px}
+.ifd-sm h5{margin:0;font-size:var(--cds-font-size-caption);font-weight:var(--cds-font-weight-medium)}
+.ifd-def dt{font-weight:var(--cds-font-weight-medium);margin-top:var(--cds-gap-sm)}
+.ifd-def dd{margin:2px 0 0;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);line-height:1.5}
+.ifd-proj{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--cds-gap-sm);font-variant-numeric:tabular-nums}
+.ifd-proj .big{font-family:var(--font-anthropic-serif);font-size:var(--cds-font-size-title)}
+.ifd-proj .op{color:var(--color-fg-muted)}
+[data-dash-source-state=refreshing]{opacity:.5;transition:opacity var(--cds-dur-slow)}
+[data-dash-source-state=empty]{color:transparent}
+.ifd-fail{display:flex;align-items:center;justify-content:center;gap:6px;min-height:inherit;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+.ifd-fail::before{content:"";width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)}
+
+.ifd{--ifd-navy:#10283d;--ifd-navy-2:#1b3a57;--ifd-gold:#ffb600;--ifd-red:#ba1200}
+.ifd-band{display:flex;align-items:center;gap:var(--cds-gap-md);background:linear-gradient(135deg,var(--ifd-navy) 0%,var(--ifd-navy-2) 100%);border-bottom:4px solid var(--ifd-gold);border-radius:var(--cds-radius);padding:var(--cds-pad-md) var(--cds-pad-lg);margin-bottom:var(--cds-gap-md);box-shadow:inset 0 -2px 0 var(--ifd-red)}
+.ifd-logo{flex:none;height:100px;width:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
+.ifd-band-text{min-width:0}
+.ifd-band .ifd-title{color:#fff;margin:0;line-height:1.15}
+.ifd-subtitle{color:var(--ifd-gold);margin:var(--cds-gap-xs) 0 var(--cds-gap-sm);font-size:var(--cds-font-size-heading);line-height:1.3}
+.ifd-band .ifd-badge{display:inline-block;color:#fff;border-color:rgba(255,255,255,.45);background:rgba(186,18,0,.55)}
+@media (max-width:520px){.ifd-logo{height:72px}.ifd-band{padding:var(--cds-pad-sm) var(--cds-pad-md)}}
+.ifd-tab[aria-selected=true]{color:var(--color-fg);border-bottom-color:var(--ifd-gold)}
+.ifd-tab:hover{color:var(--color-fg)}
+.ifd-kpi{border-top:3px solid var(--ifd-gold)}
+.ifd-kpi.counter{border-top:3px dashed var(--ifd-navy-2)}
+.ifd-sec{padding-left:var(--cds-pad-sm);border-left:4px solid var(--ifd-gold)}
+.ifd-card h3{border-bottom:2px solid color-mix(in srgb,var(--ifd-gold) 55%,transparent);padding-bottom:var(--cds-gap-xs)}
+.ifd-band-meta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--cds-gap-sm)}
+.ifd-asof{display:inline-block;color:var(--ifd-navy);background:var(--ifd-gold);border-radius:var(--cds-radius);padding:2px var(--cds-pad-sm);font-size:var(--cds-font-size-body);font-weight:var(--cds-font-weight-medium)}
+.ifd-asof b{font-weight:700;color:var(--ifd-navy)}
+</style>
+</head>
+<body>
+<div id="dash-root">
+
+
+<div class="ifd" id="ifd">
+  <header class="ifd-band" id="top">
+    <img class="ifd-logo" src="data:image/webp;base64,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" alt="Ithaca Fire Department patch" width="77" height="100">
+    <div class="ifd-band-text">
+      <h1 class="ifd-title">Ithaca Fire Department by the Numbers</h1>
+      <p class="ifd-subtitle">How the Ithaca Fire Department Is Responding to Growing Demand</p>
+      <div class="ifd-band-meta"><span class="ifd-asof">Data as of <b data-source="metrics" data-field="value" data-where="metric=data_through" class="dash-skeleton">—</b></span><span class="ifd-badge">Rough draft — not for distribution</span></div>
+    </div>
+  </header>
+  <p class="ifd-sub">Incidents January 1 – October 17, 2026 (<span data-source="metrics" data-field="value" data-where="metric=total_2026" data-fmt="int" class="dash-skeleton">—</span> incidents), compared with the same calendar days in earlier years. Response times are turnout + travel from dispatch to the first engine on scene, in-area incidents only.</p>
+  <p class="ifd-take" id="takeaway">
+    Demand is up <b data-source="metrics" data-field="value" data-where="metric=growth_vs_2025_pct" data-fmt="pct" class="dash-skeleton">—</b> on the same days of 2025 and is projected near <b data-source="metrics" data-field="value" data-where="metric=projected_2026" data-fmt="int" class="dash-skeleton">—</b> incidents for the year. The clearest service cost is losing the first-due engine: when it is already committed to another call, help typically takes <b data-source="metrics" data-field="value" data-where="metric=fd_delta_p50_s" data-fmt="mmss" class="dash-skeleton">—</b> longer for the first engine to arrive, because the next engine has farther to travel.
+  </p>
+
+  <div class="ifd-tabs" role="tablist">
+    <button class="ifd-tab" role="tab" data-tab="summary" id="tab-summary">Summary</button>
+    <button class="ifd-tab" role="tab" data-tab="demand" id="tab-demand">Demand</button>
+    <button class="ifd-tab" role="tab" data-tab="response" id="tab-response">Response</button>
+    <button class="ifd-tab" role="tab" data-tab="workload" id="tab-workload">Workload</button>
+    <button class="ifd-tab" role="tab" data-tab="time" id="tab-time">Time and overlap</button>
+    <button class="ifd-tab" role="tab" data-tab="types" id="tab-types">Call types</button>
+    <button class="ifd-tab" role="tab" data-tab="method" id="tab-method">Method and corrections</button>
+  </div>
+
+  <!-- SUMMARY -->
+  <section class="ifd-page" id="summary">
+    <div class="ifd-kpis">
+      <div class="ifd-kpi"><div class="lab">Incidents, Jan 1 – Oct 17, 2026</div>
+        <div class="big" data-source="metrics" data-field="value" data-where="metric=ytd_2026" data-fmt="int">—</div>
+        <div class="ctx"><span class="bad" data-source="metrics" data-field="value" data-where="metric=growth_vs_2025_pct" data-fmt="spct">—</span> vs the same days of 2025</div></div>
+      <div class="ifd-kpi"><div class="lab">Projected 2026 total</div>
+        <div class="big" data-source="metrics" data-field="value" data-where="metric=projected_2026" data-fmt="int">—</div>
+        <div class="ctx">Seasonal method. A flat run rate gives <span data-source="metrics" data-field="value" data-where="metric=flat_projection_2026" data-fmt="int">—</span>.</div></div>
+      <div class="ifd-kpi"><div class="lab">Incidents attended by Engine 901</div>
+        <div class="big" data-source="metrics" data-field="value" data-where="metric=share_901_pct" data-fmt="pct">—</div>
+        <div class="ctx">Its volume grew <span class="bad" data-source="metrics" data-field="value" data-where="metric=growth_901_pct" data-fmt="spct">—</span>, faster than the department</div></div>
+      <div class="ifd-kpi"><div class="lab">90% of in-area responses within</div>
+        <div class="big" data-source="metrics" data-field="value" data-where="metric=resp_tot_p90" data-fmt="mmss">—</div>
+        <div class="ctx">Turnout + travel, from dispatch. Half within <span data-source="metrics" data-field="value" data-where="metric=resp_tot_p50" data-fmt="mmss">—</span>.</div></div>
+      <div class="ifd-kpi"><div class="lab">Extra wait when the first-due engine is on another call</div>
+        <div class="big bad"><span data-source="metrics" data-field="value" data-where="metric=fd_delta_p50_s" data-fmt="smmss">—</span></div>
+        <div class="ctx">On a typical call. Happened on <span data-source="metrics" data-field="value" data-where="metric=fd_committed_inarea" data-fmt="int">—</span> in-area incidents so far in 2026.</div></div>
+      <div class="ifd-kpi counter"><div class="lab">Concurrent incidents</div>
+        <div class="big" data-source="metrics" data-field="value" data-where="metric=conc_proj_2026" data-fmt="int">—</div>
+        <div class="ctx">Projected for 2026; <span data-source="metrics" data-field="value" data-where="metric=conc_full_2024" data-fmt="int">—</span> in 2024 and <span data-source="metrics" data-field="value" data-where="metric=conc_full_2025" data-fmt="int">—</span> in 2025 (full years). Share steady at about <span data-source="metrics" data-field="value" data-where="metric=conc_share_2026_pct" data-fmt="pct">—</span>.</div></div>
+    </div>
+    <div class="ifd-card ifd-wide" id="card-findings">
+      <h3>What the data shows, suggests, and cannot establish</h3>
+      <p class="ifd-note">Findings that weaken the case are listed with the same weight as those that support it.</p>
+      <div class="ifd-find">
+        <div class="ifd-fgroup"><h4>Shown by the data</h4><table data-source="findings" data-row-key="id" data-filter="strength=Shown by the data"><thead><tr><th data-field="topic">Topic</th><th data-field="statement">Finding</th></tr></thead><tbody></tbody></table></div>
+        <div class="ifd-fgroup"><h4>Counter-evidence</h4><table data-source="findings" data-row-key="id" data-filter="strength=Counter-evidence"><thead><tr><th data-field="topic">Topic</th><th data-field="statement">Finding</th></tr></thead><tbody></tbody></table></div>
+        <div class="ifd-fgroup"><h4>Suggested, not proven</h4><table data-source="findings" data-row-key="id" data-filter="strength=Suggests"><thead><tr><th data-field="topic">Topic</th><th data-field="statement">Finding</th></tr></thead><tbody></tbody></table></div>
+        <div class="ifd-fgroup"><h4>Cannot be established from this data</h4><table data-source="findings" data-row-key="id" data-filter="strength=Cannot be established from this data"><thead><tr><th data-field="topic">Topic</th><th data-field="statement">Finding</th></tr></thead><tbody></tbody></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMAND -->
+  <section class="ifd-page" id="demand" hidden>
+    <div class="ifd-grid">
+      <div class="ifd-card" id="card-window">
+        <h3>Incidents per year</h3>
+        <p class="ifd-note">Full calendar years 2021–2025. For 2026 the solid part is actual incidents through October 17 and the dotted outline above it is the projected remainder to December 31. 2021 volume was depressed by COVID-19. Like-for-like comparisons of 2026 with earlier years use the same January 1 – October 17 window, shown in the table below.</p>
+        <div class="ifd-chart" id="ch-window" data-source="annual"></div>
+      </div>
+      <div class="ifd-card" id="card-monthly">
+        <h3>Incidents by month</h3>
+        <p class="ifd-note">October 2026 covers the 1st through the 17th only (open point). Autumn is the busiest season, which is why a flat run rate understates the year.</p>
+        <div class="ifd-chart" id="ch-monthly" data-source="monthly"></div>
+        <div class="ifd-legend" id="lg-monthly"></div>
+      </div>
+    </div>
+    <div class="ifd-grid">
+      <div class="ifd-card" id="card-proj">
+        <h3>2026 year-end projection</h3>
+        <p class="ifd-note">2026 to date, plus what 2025 recorded for the rest of the year, grown by the rate measured over the same window. Assumes no change to staffing, service area, apparatus or dispatch protocol.</p>
+        <div class="ifd-proj">
+          <span class="big" data-source="metrics" data-field="value" data-where="metric=ytd_2026" data-fmt="int">—</span><span class="op">to date +</span>
+          <span class="big" data-source="metrics" data-field="value" data-where="metric=remaining_2025" data-fmt="int">—</span><span class="op">(2025, Oct 18 – Dec 31) × (1 +</span>
+          <span data-source="metrics" data-field="value" data-where="metric=growth_vs_2025_pct" data-fmt="pct">—</span><span class="op">) ≈</span>
+          <span class="big" data-source="metrics" data-field="value" data-where="metric=projected_2026" data-fmt="int">—</span>
+        </div>
+        <p class="ifd-note" style="margin-top:var(--cds-gap-sm)">A flat run rate would give <span data-source="metrics" data-field="value" data-where="metric=flat_projection_2026" data-fmt="int">—</span>, <span data-source="metrics" data-field="value" data-where="metric=projection_gap" data-fmt="int">—</span> fewer, because it ignores the autumn peak. The full 2025 total was <span data-source="metrics" data-field="value" data-where="metric=full_2025" data-fmt="int">—</span>.</p>
+      </div>
+      <div class="ifd-card" id="card-annual">
+        <h3>Year by year</h3>
+        <p class="ifd-note">Compound growth 2022–2025 (full years): <span data-source="metrics" data-field="value" data-where="metric=cagr_2022_2025_pct" data-fmt="pct">—</span> a year. Including the COVID-affected 2021 base it would read <span data-source="metrics" data-field="value" data-where="metric=cagr_2021_2025_pct" data-fmt="pct">—</span>, which overstates the trend.</p>
+        <table data-source="annual" data-row-key="year"><thead><tr><th data-field="year" data-fmt="year">Year</th><th data-field="full_year" data-fmt="int" class="num">Full year</th><th data-field="same_window" data-fmt="int" class="num">Jan 1 – Oct 17</th><th data-field="change_vs_prior" data-fmt="spct" class="num">Change vs prior year, same window</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+
+    <div class="ifd-grid">
+      <div class="ifd-card ifd-wide" id="card-p5">
+        <h3>Five-year incident projection, 2027–2031</h3>
+        <p class="ifd-note">A range, not a forecast. All three scenarios start from the 2026 year-end projection of <span data-source="metrics" data-field="value" data-where="metric=p5_base_2026" data-fmt="int">—</span>. <b>Low</b>: <span data-source="metrics" data-field="value" data-where="metric=p5_low_rate_pct" data-fmt="pct">—</span> a year, the slowest year-over-year growth since 2022. <b>Central</b>: <span data-source="metrics" data-field="value" data-where="metric=p5_central_rate_pct" data-fmt="pct">—</span> a year, 2026's growth over the same days of 2025, compounded. <b>High</b>: <span data-source="metrics" data-field="value" data-where="metric=p5_high_rate_pct" data-fmt="pct">—</span> a year, the compound rate from 2022 to 2026 on the same calendar window. 2021 is left out of every rate because COVID-19 depressed it. Assumes no change to the service area, population served, dispatch protocol or what the department responds to; five years of history is a short base, and the range widens with each year out.</p>
+        <div class="ifd-kpis" style="margin-top:var(--cds-gap-sm)">
+          <div class="ifd-kpi"><div class="lab">2031, low</div><div class="big" data-source="metrics" data-field="value" data-where="metric=p5_low_2031" data-fmt="int">—</div></div>
+          <div class="ifd-kpi"><div class="lab">2031, central</div><div class="big" data-source="metrics" data-field="value" data-where="metric=p5_central_2031" data-fmt="int">—</div><div class="ctx"><span data-source="metrics" data-field="value" data-where="metric=p5_central_increase" data-fmt="int">—</span> more incidents than 2026 (<span data-source="metrics" data-field="value" data-where="metric=p5_central_increase_pct" data-fmt="spct">—</span>)</div></div>
+          <div class="ifd-kpi"><div class="lab">2031, high</div><div class="big" data-source="metrics" data-field="value" data-where="metric=p5_high_2031" data-fmt="int">—</div></div>
+        </div>
+        <div class="ifd-chart" id="ch-p5" data-source="projection5" style="min-height:260px"></div>
+        <div class="ifd-legend" id="lg-p5"></div>
+        <div style="height:var(--cds-gap-md)"></div>
+        <table data-source="projection5" data-row-key="year"><thead><tr><th data-field="year" data-fmt="year">Year</th><th data-field="actual" data-fmt="int" class="num">Actual</th><th data-field="low" data-fmt="int" class="num">Low</th><th data-field="central" data-fmt="int" class="num">Central</th><th data-field="high" data-fmt="int" class="num">High</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+
+    <h2 class="ifd-sec" id="committed">Hours committed to incidents</h2>
+    <p class="ifd-note" style="max-width:80ch">Shown in parts. <b>Recorded</b>: each front-line unit's time from dispatch to back in service, from the CAD record. <b>Return</b>: the drive back to quarters, which is never recorded — back in service is stamped at scene clear on <span data-source="committed_years" data-field="bis_at_clear_pct" data-where="year=2026" data-fmt="pct">—</span> of 2026 responses — estimated as each response's own measured outbound travel time (returns are usually slower, so this is conservative). <b>Return, canceled en route</b>: for a unit canceled before arriving, the drive back is estimated as the time it had driven before the cancel. <b>Turnout fill-in</b>: where the export has no dispatch time but does have an en-route time, the unit's average turnout is used for the missing piece (<span data-source="committed_years" data-field="filled_dispatch" data-where="year=2026" data-fmt="int">—</span> records in 2026). A canceled unit with no back-in-service time ends at its recorded cancel time (<span data-source="committed_years" data-field="cancel_end_used" data-where="year=2026" data-fmt="int">—</span> records in 2026). This is a workload measure only: the availability, first-due and overlap figures elsewhere still use recorded back-in-service time.</p>
+    <div class="ifd-kpis">
+      <div class="ifd-kpi"><div class="lab">Committed unit hours, Jan 1 – Oct 17, 2026</div>
+        <div class="big" data-source="committed_years" data-field="total_h" data-where="year=2026" data-fmt="int">—</div>
+        <div class="ctx"><span data-source="committed_years" data-field="recorded_h" data-where="year=2026" data-fmt="int">—</span> recorded + <span data-source="committed_years" data-field="return_h" data-where="year=2026" data-fmt="int">—</span> return + <span data-source="committed_years" data-field="return_canceled_h" data-where="year=2026" data-fmt="int">—</span> canceled return + <span data-source="committed_years" data-field="turnout_fill_h" data-where="year=2026" data-fmt="int">—</span> turnout fill-in</div></div>
+      <div class="ifd-kpi counter"><div class="lab">Median minutes per response (counter-evidence)</div>
+        <div class="big" data-source="committed_years" data-field="median_min_per_response" data-where="year=2026" data-fmt="dec1">—</div>
+        <div class="ctx"><span data-source="committed_years" data-field="median_min_per_response" data-where="year=2024" data-fmt="dec1">—</span> in 2024. Flat. Average: <span data-source="committed_years" data-field="min_per_response" data-where="year=2026" data-fmt="dec1">—</span>.</div></div>
+      <div class="ifd-kpi"><div class="lab">Engine 901, share of all hours committed</div>
+        <div class="big bad" data-source="committed_units" data-field="share_of_clock_pct" data-where="position=901" data-fmt="pct">—</div>
+        <div class="ctx"><span data-source="committed_units" data-field="recorded_share_pct" data-where="position=901" data-fmt="pct">—</span> on recorded time alone; 24 hours a day</div></div>
+    </div>
+    <div class="ifd-grid">
+      <div class="ifd-card" id="card-commit-years">
+        <h3>Committed hours by year, same window</h3>
+        <p class="ifd-note">Front-line positions, measured responses only. Total committed time is roughly flat across three years while incidents grew; the typical (median) response takes the same time each year. The 2024 window includes February 29.</p>
+        <div class="ifd-chart" id="ch-commit" data-source="committed_years"></div>
+        <div class="ifd-legend" id="lg-commit"></div>
+      </div>
+      <div class="ifd-card" id="card-commit-ytab">
+        <h3>How the totals were measured</h3>
+        <p class="ifd-note">"Unit responses" counts every front-line unit sent.</p>
+        <table data-source="committed_years" data-row-key="year"><thead><tr><th data-field="year" data-fmt="year">Year</th><th data-field="unit_responses" data-fmt="int" class="num">Unit responses</th><th data-field="measured" data-fmt="int" class="num">Measured</th><th data-field="excluded_pct" data-fmt="pct" class="num">Excluded</th><th data-field="recorded_h" data-fmt="int" class="num">Recorded</th><th data-field="turnout_fill_h" data-fmt="int" class="num">Turnout fill-in</th><th data-field="return_h" data-fmt="int" class="num">Return</th><th data-field="return_canceled_h" data-fmt="int" class="num">Canceled return</th><th data-field="total_h" data-fmt="int" class="num">Total hours</th><th data-field="median_min_per_response" data-fmt="dec1" class="num">Median min per response</th><th data-field="min_per_response" data-fmt="dec1" class="num">Average min per response</th></tr></thead><tbody></tbody></table>
+        <p class="ifd-note" style="margin-top:var(--cds-gap-sm)">The median is the headline figure because a few very long records pull the average up. Totals and averages are kept so the hours add up.</p>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-commit-excl">
+        <h3>Why unit records are left out</h3>
+        <p class="ifd-note">Unit records by reason. Rows marked "kept" are now counted, using the turnout fill-in or the recorded cancel time; the rest have no usable start or end, or are demonstrably wrong, and are excluded. In late May and early June 2024, <span data-source="metrics" data-field="value" data-where="metric=stale_2024" data-fmt="int">—</span> false-alarm unit records were left open overnight and closed together the next morning, adding <span data-source="metrics" data-field="value" data-where="metric=stale_2024_h" data-fmt="int">—</span> hours that did not happen; any alarm or no-emergency response committed over 4 hours is now excluded as an error. "Dispatched, no later times" and missing dispatch times jumped in 2026, which points to how the new export or reporting system writes these records rather than to missing work.</p>
+        <table data-source="committed_excl" data-row-key="reason"><thead><tr><th data-field="reason">Reason</th><th data-field="y2024" data-fmt="int" class="num">2024</th><th data-field="y2025" data-fmt="int" class="num">2025</th><th data-field="y2026" data-fmt="int" class="num">2026</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-commit-units">
+        <h3>Committed hours by position, 2026</h3>
+        <p class="ifd-note">"Share of all hours" is total committed hours divided by every hour in the window, around the clock. "Average turnout" is the position's mean 2026 turnout, used for the fill-in. Compare 2025 and 2026 only where the excluded share is similar in both years; 902 and 904 lost noticeably more records in 2026 than in 2025, so their changes understate 2026.</p>
+        <table data-source="committed_units" data-row-key="position"><thead><tr><th data-field="position">Position</th><th data-field="measured" data-fmt="int" class="num">Measured</th><th data-field="recorded_h" data-fmt="int" class="num">Recorded</th><th data-field="turnout_fill_h" data-fmt="int" class="num">Turnout fill-in</th><th data-field="return_h" data-fmt="int" class="num">Return</th><th data-field="return_canceled_h" data-fmt="int" class="num">Canceled return</th><th data-field="total_h" data-fmt="int" class="num">Total 2026</th><th data-field="total_2025_h" data-fmt="int" class="num">Total 2025</th><th data-field="change_pct" data-fmt="spct" class="num">Change</th><th data-field="excluded_2025_pct" data-fmt="pct" class="num">Excluded 2025</th><th data-field="excluded_2026_pct" data-fmt="pct" class="num">Excluded 2026</th><th data-field="mean_turnout_s" data-fmt="mmss" class="num">Average turnout</th><th data-field="share_of_clock_pct" data-fmt="pct" data-bar="25" class="num">Share of all hours</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-p901">
+        <h3>Engine 901: projected time committed to incidents, 2026–2031</h3>
+        <p class="ifd-note">Full calendar years, around the clock, using the same committed-hours method (recorded time plus estimated return drive). 2024 and 2025 are actual; 2026 onward is projected as 901's share of incidents (<span data-source="metrics" data-field="value" data-where="metric=p901_share_pct" data-fmt="pct">—</span> in 2026) × the five-year incident scenarios above × 901's 2026 average of <span data-source="metrics" data-field="value" data-where="metric=p901_min_per_resp" data-fmt="dec1">—</span> committed minutes per response. Holding 901's share fixed is conservative: it has been rising. Assumes no change to how calls are assigned between units.</p>
+        <div class="ifd-kpis">
+          <div class="ifd-kpi"><div class="lab">2026, projected full year</div><div class="big" data-source="metrics" data-field="value" data-where="metric=p901_2026_share" data-fmt="pct">—</div><div class="ctx"><span data-source="metrics" data-field="value" data-where="metric=p901_2026_h" data-fmt="int">—</span> hours committed</div></div>
+          <div class="ifd-kpi"><div class="lab">2031, central</div><div class="big bad" data-source="metrics" data-field="value" data-where="metric=p901_2031_share" data-fmt="pct">—</div><div class="ctx"><span data-source="metrics" data-field="value" data-where="metric=p901_2031_h" data-fmt="int">—</span> hours; range <span data-source="metrics" data-field="value" data-where="metric=p901_2031_low_share" data-fmt="pct">—</span> to <span data-source="metrics" data-field="value" data-where="metric=p901_2031_high_share" data-fmt="pct">—</span></div></div>
+        </div>
+        <div class="ifd-chart" id="ch-p901" data-source="proj901" style="min-height:240px"></div>
+        <div class="ifd-legend" id="lg-p901"></div>
+        <div style="height:var(--cds-gap-md)"></div>
+        <table data-source="proj901" data-row-key="year"><thead><tr><th data-field="year" data-fmt="year">Year</th><th data-field="actual_h" data-fmt="int" class="num">Actual hours</th><th data-field="actual_share_pct" data-fmt="pct" class="num">Actual share of year</th><th data-field="resp_central" data-fmt="int" class="num">901 responses (central)</th><th data-field="low_h" data-fmt="int" class="num">Low hours</th><th data-field="central_h" data-fmt="int" class="num">Central hours</th><th data-field="high_h" data-fmt="int" class="num">High hours</th><th data-field="central_share_pct" data-fmt="pct" class="num">Central share of year</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESPONSE -->
+  <section class="ifd-page" id="response" hidden>
+    <div class="ifd-kpis">
+      <div class="ifd-kpi"><div class="lab">Travel, 90% of calls within</div><div class="big bad" data-source="metrics" data-field="value" data-where="metric=resp_trav_p90" data-fmt="mmss">—</div><div class="ctx">NFPA 1710: 4:00. Met on <span data-source="metrics" data-field="value" data-where="metric=meet_trav_pct" data-fmt="pct">—</span> of responses, against a 90% target.</div></div>
+      <div class="ifd-kpi"><div class="lab">Turnout, median</div><div class="big bad" data-source="response" data-field="p50" data-where="component=Turnout (dispatch to en route)" data-fmt="mmss">—</div><div class="ctx">Half of units en route within this time; 90% within <span data-source="metrics" data-field="value" data-where="metric=resp_turn_p90" data-fmt="mmss">—</span>. NFPA 1710: 1:00 medical, 1:20 fire at the 90th percentile. Met on <span data-source="metrics" data-field="value" data-where="metric=meet_turn_ems_pct" data-fmt="pct">—</span> of medical and <span data-source="metrics" data-field="value" data-where="metric=meet_turn_fire_pct" data-fmt="pct">—</span> of other calls.</div></div>
+      <div class="ifd-kpi"><div class="lab">Responses measured</div><div class="big" data-source="metrics" data-field="value" data-where="metric=resp_measured" data-fmt="int">—</div><div class="ctx">Of <span data-source="metrics" data-field="value" data-where="metric=inarea_incidents" data-fmt="int">—</span> in-area incidents. <span data-source="metrics" data-field="value" data-where="metric=resp_excluded" data-fmt="int">—</span> excluded for errors or missing times.</div></div>
+    </div>
+    <div class="ifd-grid">
+      <div class="ifd-card ifd-wide" id="card-pct">
+        <h3>How long responses take</h3>
+        <p class="ifd-note">"90% within" is the 90th percentile: the time by which nine in ten responses had arrived. Turnout and travel are measured separately; their 90th percentiles do not add up to the combined 90th percentile, because the slowest turnouts and slowest drives rarely fall on the same call. Averages do add. Measured from dispatch, these are not directly comparable to NFPA 1710 total response times, which also include call processing.</p>
+        <table data-source="response" data-row-key="component"><thead><tr><th data-field="component">Interval</th><th data-field="p50" data-fmt="mmss" class="num">50% within</th><th data-field="p80" data-fmt="mmss" class="num">80% within</th><th data-field="p90" data-fmt="mmss" class="num">90% within</th><th data-field="mean" data-fmt="mmss" class="num">Average</th><th data-field="nfpa_90th">NFPA 1710 (90%)</th></tr></thead><tbody></tbody></table>
+        <div style="height:var(--cds-gap-md)"></div>
+        <table data-source="turnout_split" data-row-key="type"><thead><tr><th data-field="type">Turnout by call type</th><th data-field="measured" data-fmt="int" class="num">Measured</th><th data-field="p50" data-fmt="mmss" class="num">50% within</th><th data-field="p90" data-fmt="mmss" class="num">90% within</th><th data-field="benchmark_s" data-fmt="mmss" class="num">Benchmark</th><th data-field="within_benchmark_pct" data-fmt="pct" class="num">Within benchmark</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card" id="card-fd">
+        <h3>When the first-due engine is already on another call</h3>
+        <p class="ifd-note">Each area has an assigned first-due engine. When it was committed elsewhere at the moment of dispatch, an engine from farther away had to cover. Time from dispatch to the first engine on scene (turnout + travel).</p>
+        <div class="ifd-chart" id="ch-fd" data-source="first_due"></div>
+        <div class="ifd-legend" id="lg-fd"></div>
+        <p class="ifd-note" style="margin-top:var(--cds-gap-sm)">The 90th-percentile gap of <span data-source="metrics" data-field="value" data-where="metric=fd_delta_p90_s" data-fmt="mmss">—</span> has a 95% bootstrap interval of <span data-source="metrics" data-field="value" data-where="metric=fd_ci_p90_lo" data-fmt="mmss">—</span> to <span data-source="metrics" data-field="value" data-where="metric=fd_ci_p90_hi" data-fmt="mmss">—</span>, so the slowdown is real but its size is uncertain. <span data-source="metrics" data-field="value" data-where="metric=fd_unclassified" data-fmt="int">—</span> measured responses lacked a response zone or dispatch time and are not classified.</p>
+      </div>
+      <div class="ifd-card" id="card-fdt">
+        <h3>First-due comparison</h3>
+        <p class="ifd-note">Travel within 4:00 falls sharply when the first-due engine is unavailable, because the covering unit starts farther away.</p>
+        <table data-source="first_due" data-row-key="condition"><thead><tr><th data-field="condition">Condition</th><th data-field="measured" data-fmt="int" class="num">Measured</th><th data-field="p50_s" data-fmt="mmss" class="num">50% within</th><th data-field="p90_s" data-fmt="mmss" class="num">90% within</th><th data-field="travel_within_240_pct" data-fmt="pct" class="num">Travel within 4:00</th><th data-field="first_due_arrived_first_pct" data-fmt="pct" class="num">First-due arrived first</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-citytown">
+        <h3>Travel time: City and Town</h3>
+        <p class="ifd-note">In-area incidents, 2026, first-arriving engine, en route to on scene. City zones are numbered (1-2); Town zones begin ITH-. Town addresses are farther from the stations, so travel runs longer there.</p>
+        <div class="ifd-chart" id="ch-ct-trav" data-source="city_town" style="min-height:200px"></div>
+        <div class="ifd-legend" id="lg-citytown"></div>
+        <div style="height:var(--cds-gap-md)"></div>
+        <table data-source="city_town" data-row-key="area"><thead><tr><th data-field="area">Area</th><th data-field="incidents" data-fmt="int" class="num">Incidents</th><th data-field="measured" data-fmt="int" class="num">Measured</th><th data-field="travel_p50" data-fmt="mmss" class="num">Travel, median</th><th data-field="travel_p90" data-fmt="mmss" class="num">Travel, 90% within</th><th data-field="travel_within_240_pct" data-fmt="pct" class="num">Travel within 4:00</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-zones">
+        <h3>Travel time by fire zone</h3>
+        <p class="ifd-note">City zones are numbered (1-2), Town zones begin ITH-. "Incidents" counts every incident in the zone; "Measured" counts those with a valid first-arrival time. Zones with fewer than 50 measured responses are marked; treat them with caution. Select a column heading to sort.</p>
+        <div class="ifd-tw"><table id="tbl-zones" data-source="zones" data-row-key="zone" data-sortable="1"><thead><tr><th data-field="zone">Zone</th><th data-field="jurisdiction">Area</th><th data-field="incidents" data-fmt="int" class="num">Incidents</th><th data-field="measured" data-fmt="int" class="num">Measured</th><th data-field="travel_median_s" data-fmt="mmss" class="num">Travel, 50% within</th><th data-field="travel_p90_s" data-fmt="mmss" class="num">Travel, 90% within</th><th data-field="within_240s_pct" data-fmt="pct" data-bar="100" data-hi="lt60" class="num">Travel within 4:00</th><th data-field="small_sample" data-fmt="flag">Sample</th></tr></thead><tbody></tbody></table></div>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-funnel">
+        <h3>Which responses were measured</h3>
+        <p class="ifd-note">Nothing is estimated. Records with demonstrable errors or missing times are excluded and counted here. Out-of-area incidents (<span data-source="metrics" data-field="value" data-where="metric=out_of_area" data-fmt="int">—</span>) and incidents with no zone (<span data-source="metrics" data-field="value" data-where="metric=no_zone" data-fmt="int">—</span>) are left out before this table starts.</p>
+        <table data-source="resp_funnel" data-row-key="stage"><thead><tr><th data-field="stage">Stage</th><th data-field="count" data-fmt="int" class="num">Incidents</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKLOAD -->
+  <section class="ifd-page" id="workload" hidden>
+    <div class="ifd-grid">
+      <div class="ifd-card ifd-wide" id="card-units">
+        <h3>Incidents attended by each front-line position</h3>
+        <p class="ifd-note">January 1 – October 17. A unit counts once per incident it was sent to, so the positions together exceed the <span data-source="metrics" data-field="value" data-where="metric=total_2026" data-fmt="int">—</span> incidents. 931/932 and 963/964/965 are each one position; 964 is counted with the command position from September 1, 2026. Front-line positions made <span data-source="metrics" data-field="value" data-where="metric=frontline_share_pct" data-fmt="pct">—</span> of all <span data-source="metrics" data-field="value" data-where="metric=unit_responses_2026" data-fmt="int">—</span> unit responses; reserve and support units are counted in incident totals but not shown here.</p>
+        <table data-source="units" data-row-key="position"><thead><tr><th data-field="position">Position</th><th data-field="incidents_2025" data-fmt="int" class="num">2025</th><th data-field="incidents_2026" data-fmt="int" class="num">2026</th><th data-field="change_pct" data-fmt="spct" class="num">Change</th><th data-field="share_2026_pct" data-fmt="pct" data-bar="100" class="num">Share of all incidents</th><th data-field="medical_pct" data-fmt="pct" class="num">Medical share of its calls (illness + injury/trauma)</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-mix">
+        <h3>What each position responds to</h3>
+        <p class="ifd-note">2026, by incident group crews recorded on scene (NERIS). Truck and Command run almost no medical calls (<span data-source="metrics" data-field="value" data-where="metric=med_931_pct" data-fmt="pct">—</span> and <span data-source="metrics" data-field="value" data-where="metric=med_963_pct" data-fmt="pct">—</span>), so medical demand — <span data-source="metrics" data-field="value" data-where="metric=medical_share_pct" data-fmt="pct">—</span> of all incidents — rests on the four engines.</p>
+        <div class="ifd-chart" id="ch-mix" data-source="unit_mix" style="min-height:240px"></div>
+        <div class="ifd-legend" id="lg-mix"></div>
+      </div>
+    </div>
+    <h2 class="ifd-sec" id="areas">Where each unit goes</h2>
+    <div class="ifd-grid">
+      <div class="ifd-card ifd-wide" id="card-unitareas">
+        <h3>Where each unit's responses go</h3>
+        <p class="ifd-note">Every incident each unit was sent to in 2026 (January 1 – October 17), by the first-due area it was in. Areas follow the response zone: 99 is 902's area; 95 and 951 are 903's; 96 and 961 are 904's; every other zone is 901's. For October 2026 incidents exported without a response zone, the zone recorded at the same address on earlier incidents is used (<span data-source="metrics" data-field="value" data-where="metric=rz_filled" data-fmt="int">—</span> incidents, only where one zone accounts for at least 90% of that address's history). Truck is 931/932 and Command is 963/964/965; both are based in the 901 district. Each unit's home-area count is in bold (outlined in the chart). "Outside own area" counts only incidents with a response zone. 903 and 904 spend most of their time outside their own areas, mainly in 901's.</p>
+        <div class="ifd-chart" id="ch-unitareas" data-source="unit_area_mix" style="min-height:260px"></div>
+        <div class="ifd-legend" id="lg-unitareas"></div>
+        <div style="height:var(--cds-gap-md)"></div>
+        <table id="tbl-unitareas" data-source="unit_areas" data-row-key="unit"><thead><tr><th data-field="unit">Unit</th><th data-field="a901" data-fmt="int" data-area="901 area" class="num">901 area</th><th data-field="a902" data-fmt="int" data-area="902 area" class="num">902 area</th><th data-field="a903" data-fmt="int" data-area="903 area" class="num">903 area</th><th data-field="a904" data-fmt="int" data-area="904 area" class="num">904 area</th><th data-field="none" data-fmt="int" class="num">No zone</th><th data-field="total" data-fmt="int" class="num">Total</th><th data-field="outside_pct" data-fmt="pct" data-bar="100" class="num">Outside own area</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIME -->
+  <section class="ifd-page" id="time" hidden>
+    <div class="ifd-grid">
+      <div class="ifd-card" id="card-hourly">
+        <h3>Incidents by hour of day</h3>
+        <p class="ifd-note"><span data-source="metrics" data-field="value" data-where="metric=peak12_share_pct" data-fmt="pct">—</span> of 2026 incidents fall in the shaded twelve hours. Whether staffing matches this pattern can't be tested without the duty roster.</p>
+        <div class="ifd-chart" id="ch-hourly" data-source="hourly metrics"></div>
+      </div>
+      <div class="ifd-card" id="card-heat">
+        <h3>Day of week and hour</h3>
+        <p class="ifd-note">Incidents in 2026; darker is busier.</p>
+        <div class="ifd-chart" id="ch-heat" data-source="hour_dow"></div>
+      </div>
+      <div class="ifd-card" id="card-conct">
+        <h3>Incidents that began while another was under way</h3>
+        <p class="ifd-note">Incidents dispatched while at least one other incident was still under way. Full calendar years for 2024 and 2025; for 2026 the solid bar is the count through October 17 and the dotted outline is the projection to December 31 (2026 to date plus 2025's October 18 – December 31 count, adjusted by the change measured over the same window: <span data-source="metrics" data-field="value" data-where="metric=conc_proj_growth_pct" data-fmt="spct">—</span>). An incident is active from dispatch until the last unit clears, or the last unit is back in service where that is missing. Incidents with no end time cannot be checked; alarm or no-emergency incidents left open over 4 hours are excluded as errors. The share stays steady because incidents are clearing faster as calls increase.</p>
+        <div class="ifd-chart" id="ch-conct" data-source="conc_trend"></div>
+        <table data-source="conc_trend" data-row-key="year"><thead><tr><th data-field="year" data-fmt="year">Year</th><th data-field="incidents_full" data-fmt="int" class="num">Incidents, full year</th><th data-field="overlapping_full" data-fmt="int" class="num">Began during another, full year</th><th data-field="share_full_pct" data-fmt="pct" class="num">Share</th><th data-field="overlapping_window" data-fmt="int" class="num">Same window (Jan 1 – Oct 17)</th><th data-field="share_window_pct" data-fmt="pct" class="num">Share, same window</th><th data-field="not_measured" data-fmt="int" class="num">Not measured</th></tr></thead><tbody></tbody></table>
+        <p class="ifd-note" style="margin-top:var(--cds-gap-sm)">2026 full-year values are projections (incidents 6,174).</p>
+      </div>
+      <div class="ifd-card" id="card-concr">
+        <h3>Response when another incident is active</h3>
+        <p class="ifd-note">Counter-evidence, refined: an overlapping call does not by itself slow response. The slowdown appears only when the overlap takes the first-due engine. Turnout + travel; <span data-source="metrics" data-field="value" data-where="metric=conc_unclassified" data-fmt="int">—</span> measured responses lacked a clear time and are not classified.</p>
+        <div class="ifd-chart" id="ch-concr" data-source="conc_resp"></div>
+        <div class="ifd-legend" id="lg-concr"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES -->
+  <section class="ifd-page" id="types" hidden>
+    <div class="ifd-grid">
+      <div class="ifd-card ifd-wide" id="card-groups">
+        <h3>2026 incidents by what crews found, and the crew time they used</h3>
+        <p class="ifd-note">Incident group is what crews recorded on scene (NERIS), not what was reported at dispatch. Crew time is each unit's crew size × the time from its dispatch to back in service. <span data-source="metrics" data-field="value" data-where="metric=ph_excluded" data-fmt="int">—</span> of <span data-source="metrics" data-field="value" data-where="metric=ph_unit_total" data-fmt="int">—</span> unit records lacked a crew list or valid times and are left out of crew time only. Medical calls (illness plus injury/trauma) are <span data-source="metrics" data-field="value" data-where="metric=medical_share_pct" data-fmt="pct">—</span> of incidents but <span data-source="metrics" data-field="value" data-where="metric=ph_medical_share_pct" data-fmt="pct">—</span> of crew time; fires and hazards take the most crew time per call.</p>
+        <table data-source="groups" data-row-key="group"><thead><tr><th data-field="group">Group</th><th data-field="incidents" data-fmt="int" class="num">Incidents</th><th data-field="share_pct" data-fmt="pct" data-bar="60" class="num">Share of incidents</th><th data-field="unit_person_hours" data-fmt="int" class="num">Crew hours</th><th data-field="person_hours_share_pct" data-fmt="pct" data-bar="60" class="num">Share of crew hours</th><th data-field="person_hours_per_incident" data-fmt="dec2" class="num">Crew hours per incident</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-areatypes">
+        <h3>Incident types: City, Town and out of district</h3>
+        <p class="ifd-note">2026 incidents, January 1 – October 17, by what crews found on scene. The last two rows give each area's total incidents and its share of all incidents. City zones are numbered (1-2); Town zones begin ITH-; out of district includes <span data-source="metrics" data-field="value" data-where="metric=no_zone" data-fmt="int">—</span> incidents with no zone recorded.</p>
+        <table id="tbl-areatypes" data-source="area_types" data-row-key="group"><thead><tr><th data-field="group">Call type</th><th data-field="city" data-fmt="int" class="num">City</th><th data-field="town" data-fmt="int" class="num">Town</th><th data-field="ood" data-fmt="int" class="num">Out of district</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card" id="card-sub">
+        <h3>Most common sub-groups, 2026</h3>
+        <p class="ifd-note">Top twelve of all coded incidents.</p>
+        <table data-source="subgroups" data-row-key="group,subgroup"><thead><tr><th data-field="group">Group</th><th data-field="subgroup">Sub-group</th><th data-field="incidents" data-fmt="int" class="num">Incidents</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card" id="card-sf">
+        <h3>Personnel on confirmed structure fires, 2026</h3>
+        <p class="ifd-note"><span data-source="metrics" data-field="value" data-where="metric=sf_le11" data-fmt="int">—</span> of <span data-source="metrics" data-field="value" data-where="metric=sf_n" data-fmt="int">—</span> had 11 or fewer department personnel on the report. The dashed line marks the 15-person NFPA 1710 residential assignment. Many were confined cooking fires that did not need a full assignment.</p>
+        <div class="ifd-chart" id="ch-sf" data-source="sf_personnel"></div>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-nfirs">
+        <h3>Trends under the old coding system, 2021–2025</h3>
+        <p class="ifd-note">NFIRS series, January 1 – November 12 each year (before the November 13, 2025 switch to NERIS). These cannot be continued into 2026: the two systems classify differently, and no crosswalk is reliable enough for a trend. Each panel has its own scale. Fire and hazardous-condition calls fell; false alarms did not.</p>
+        <div class="ifd-sm" id="sm-nfirs" data-source="nfirs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section class="ifd-page" id="method" hidden>
+    <div class="ifd-grid">
+      <div class="ifd-card ifd-wide" id="card-recon">
+        <h3>Corrections to earlier figures</h3>
+        <p class="ifd-note">Where this dashboard differs from figures used earlier in the project, both are shown. None of these should be presented until reconciled.</p>
+        <table data-source="reconcile" data-row-key="item"><thead><tr><th data-field="item">Item</th><th data-field="earlier">Earlier figure</th><th data-field="this_dashboard">This dashboard</th><th data-field="note">Note</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="ifd-card ifd-wide" id="card-defs">
+        <h3>Definitions</h3>
+        <dl class="ifd-def">
+          <dt>Incident</dt><dd>One call for service. The exports list one row per unit (2026: per firefighter), so rows are reduced to one per incident before any incident count or incident-level figure, and to one per unit per incident for unit counts.</dd>
+          <dt>Comparison window</dt><dd>January 1 through October 17 in every year, the last complete day in the latest 2026 export. Partial years are never compared with full years.</dd>
+          <dt>Response time</dt><dd>Turnout (dispatch to en route) plus travel (en route to on scene) for the first engine to arrive (901, 902, 903 or 904). Truck and Command are not counted as the first arrival: the measure is engine to engine. An earlier version of this dashboard included them, which understated the first-due delay (corrected October 23, 2026). Incidents where no engine arrived are counted in the totals but not measured. In-area incidents only (City zones and Town ITH- zones). The export's "Time to First Arrival" field is not used: it starts when the call reaches the dispatch center, before the department is notified.</dd>
+          <dt>Excluded records</dt><dd>Negative intervals; turnout over 6 minutes; zero turnout or travel; arrival stamped at departure (on scene 5 seconds or less after a travel time over 9 minutes); missing en-route time. Arrivals over 17 minutes are kept. No value is estimated.</dd>
+          <dt>First-due engine committed</dt><dd>The engine assigned to the incident's response zone (99 → 902; 95, 951 → 903; 96, 961 → 904; all others → 901) had been dispatched to another incident and was not yet back in service when this incident was dispatched. Out-of-service time for maintenance or training is not in the data and is not counted.</dd>
+          <dt>Response zone fill-in (October 2026)</dt><dd>The October 18 export left the response zone blank on many October incidents, apparently because it is completed later in the records process. By department decision, a blank October response zone takes the zone recorded at the same address on earlier incidents, but only when one zone accounts for at least 90% of that address's history; otherwise it stays blank. This affects first-due and area figures only. By department confirmation, 115 East Shore Cir and 134 Graham Rd (two 2026 structure fires with no zone in the export) are out of district.</dd>
+          <dt>Overlap (concurrency)</dt><dd>Another incident was active — dispatched and not yet cleared by its last unit — when this incident was dispatched.</dd>
+          <dt>Committed hours</dt><dd>Workload only. Recorded time from dispatch to back in service for each front-line unit, plus an estimated return drive equal to that response's own measured travel time (only where the travel time passes the error checks). A unit canceled before arriving ends at its back-in-service time, or at its recorded cancel time when back in service is blank; its return drive is estimated as the time from en route to cancel (counted only when that is positive and under 20 minutes, and only when back in service is blank or stamped at the cancel). Where a unit record has an en-route time but no dispatch time, the dispatch time is set to en-route minus that position's average 2026 turnout. This is the one place on the dashboard where a missing value is filled rather than excluded, by department decision, and the filled hours are shown separately. Records with no end time, or a span of zero or over 24 hours, are excluded, as are alarm or no-emergency responses committed more than 4 hours (records left open and closed later in a batch). The headline figure is the median minutes per response; the average is shown alongside. Engine 901's projection multiplies its 2026 share of incidents and its 2026 average committed minutes per response by each incident scenario. Availability, first-due and overlap figures do not include the return time or the fill-in.</dd>
+          <dt>Incident group</dt><dd>NERIS primary incident group, with two department adjustments: "Medical – Injury / Trauma – Motor Vehicle Collision" is counted as Rescue, because the incident is a vehicle crash (<span data-source="metrics" data-field="value" data-where="metric=mvc_reclassified" data-fmt="int">—</span> incidents in 2026); and the remaining medical incidents are split into Illness and Injury/Trauma. Medical turnout is measured against the 60-second EMS benchmark; reclassified crashes use the 80-second benchmark. Groups are what the crew recorded on scene. Dispatch type is not used. Groups are not compared with earlier years.</dd>
+          <dt>Projection</dt><dd>2026 to date plus 2025's actual incidents from October 18 to December 31, multiplied by the growth measured over the comparison window.</dd>
+          <dt>Five-year projection</dt><dd>Three scenarios from the 2026 year-end projection. Low applies the slowest year-over-year growth since 2022 (same calendar window) each year. Central compounds 2026's growth over the same calendar window of 2025 each year. High applies the compound growth from 2022 to 2026 on the same calendar window. 2021 is excluded because COVID-19 depressed its volume. These are scenarios for planning, not predictions.</dd>
+          <dt>Sources</dt><dd>CAD incident exports pulled September 5, 2026 (2021–2025), and September 22 and October 18, 2026 (2026: the September export through August 31, the October export from September 1). Every figure on this page comes from the summary tables listed under Sources, computed from those exports.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="ifd-tip" id="tip"></div>
+</div>
+
+
+<p class="ifd-foot">Snapshot built from CAD incident exports; data as of October 17, 2026. Rough draft for internal review. Not for distribution.</p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>window.__IFD_DATA={"annual":[{"year":2021,"full_year":4783,"same_window":3789,"change_vs_prior":null,"projected":false,"total":4783,"total_change_pct":null},{"year":2022,"full_year":5241,"same_window":4104,"change_vs_prior":8.3,"projected":false,"total":5241,"total_change_pct":9.6},{"year":2023,"full_year":5347,"same_window":4318,"change_vs_prior":5.2,"projected":false,"total":5347,"total_change_pct":2.0},{"year":2024,"full_year":5596,"same_window":4429,"change_vs_prior":2.6,"projected":false,"total":5596,"total_change_pct":4.7},{"year":2025,"full_year":5987,"same_window":4733,"change_vs_prior":6.9,"projected":false,"total":5987,"total_change_pct":7.0},{"year":2026,"full_year":null,"same_window":4881,"change_vs_prior":3.1,"projected":true,"total":6174,"total_change_pct":3.1}],"area_types":[{"group":"Medical \u2013 Illness","city":1325,"town":420,"ood":3},{"group":"Medical \u2013 Injury/Trauma","city":380,"town":194,"ood":2},{"group":"Public Service","city":1214,"town":326,"ood":22},{"group":"No Emergency","city":378,"town":82,"ood":12},{"group":"Hazardous Situation","city":176,"town":46,"ood":1},{"group":"Rescue","city":125,"town":36,"ood":2},{"group":"Fire","city":68,"town":17,"ood":5},{"group":"Law Enforcement Support","city":14,"town":2,"ood":0},{"group":"Not coded","city":18,"town":13,"ood":0},{"group":"All incidents","city":3698,"town":1136,"ood":47},{"group":"% of all incidents","city":75.8,"town":23.3,"ood":1.0,"row_fmt":"pct"}],"city_town":[{"area":"City","incidents":3698,"measured":3023,"turnout_p50":112.0,"turnout_p90":199.0,"travel_p50":167.0,"travel_p90":331.8000000000002,"total_p50":289.0,"total_p90":467.0,"travel_within_240_pct":75.3},{"area":"Town","incidents":1136,"measured":901,"turnout_p50":120.0,"turnout_p90":212.0,"travel_p50":235.0,"travel_p90":489.0,"total_p50":368.0,"total_p90":610.0,"travel_within_240_pct":51.7}],"committed_excl":[{"reason":"No dispatch time, filled with average turnout (kept)","y2024":0,"y2025":35,"y2026":427,"kept":true},{"reason":"No dispatch or en-route time (excluded)","y2024":0,"y2025":1,"y2026":26,"kept":false},{"reason":"Canceled before arrival, no back-in-service time, cancel time used as end (kept)","y2024":258,"y2025":368,"y2026":277,"kept":true},{"reason":"Arrived, never marked back in service (excluded)","y2024":21,"y2025":160,"y2026":126,"kept":false},{"reason":"Dispatched, no later times recorded (excluded)","y2024":2,"y2025":23,"y2026":192,"kept":false},{"reason":"Alarm or no-emergency call left open over 4 hours (excluded)","y2024":15,"y2025":0,"y2026":0,"kept":false},{"reason":"Other: zero, negative or over-24-hour span (excluded)","y2024":39,"y2025":19,"y2026":3,"kept":false}],"committed_units":[{"position":"901","unit_responses":3290,"measured":3211,"recorded_h":775,"turnout_fill_h":4,"return_h":142,"return_canceled_h":20,"total_h":941,"total_2025_h":894,"change_pct":5.3,"excluded_2025_pct":3.6,"excluded_2026_pct":2.4,"share_of_clock_pct":13.5,"recorded_share_pct":11.1,"mean_turnout_s":122,"turnout_basis":2974},{"position":"902","unit_responses":1780,"measured":1660,"recorded_h":433,"turnout_fill_h":2,"return_h":82,"return_canceled_h":13,"total_h":530,"total_2025_h":536,"change_pct":-1.1,"excluded_2025_pct":2.1,"excluded_2026_pct":6.7,"share_of_clock_pct":7.6,"recorded_share_pct":6.2,"mean_turnout_s":127,"turnout_basis":1622},{"position":"903","unit_responses":947,"measured":917,"recorded_h":219,"turnout_fill_h":1,"return_h":43,"return_canceled_h":6,"total_h":269,"total_2025_h":269,"change_pct":0.0,"excluded_2025_pct":1.9,"excluded_2026_pct":3.2,"share_of_clock_pct":3.9,"recorded_share_pct":3.1,"mean_turnout_s":141,"turnout_basis":836},{"position":"904","unit_responses":1040,"measured":980,"recorded_h":250,"turnout_fill_h":2,"return_h":54,"return_canceled_h":10,"total_h":316,"total_2025_h":300,"change_pct":5.3,"excluded_2025_pct":1.6,"excluded_2026_pct":5.8,"share_of_clock_pct":4.5,"recorded_share_pct":3.6,"mean_turnout_s":124,"turnout_basis":897},{"position":"931/932","unit_responses":1557,"measured":1517,"recorded_h":291,"turnout_fill_h":2,"return_h":69,"return_canceled_h":9,"total_h":371,"total_2025_h":399,"change_pct":-7.0,"excluded_2025_pct":0.7,"excluded_2026_pct":2.6,"share_of_clock_pct":5.3,"recorded_share_pct":4.2,"mean_turnout_s":143,"turnout_basis":1422},{"position":"963/964/965","unit_responses":1642,"measured":1624,"recorded_h":428,"turnout_fill_h":3,"return_h":91,"return_canceled_h":7,"total_h":529,"total_2025_h":523,"change_pct":1.1,"excluded_2025_pct":0.7,"excluded_2026_pct":1.1,"share_of_clock_pct":7.6,"recorded_share_pct":6.1,"mean_turnout_s":108,"turnout_basis":1461}],"committed_years":[{"year":2024,"days":291,"unit_responses":9260,"measured":9183,"excluded":77,"excluded_pct":0.8,"filled_dispatch":0,"recorded_h":2233,"turnout_fill_h":0,"return_h":411,"return_canceled_h":84,"cancel_end_used":258,"canceled_return_n":1509,"canceled_return_dropped":5,"total_h":2728,"min_per_response":17.8,"median_min_per_response":14.7,"stale_excluded":15,"stale_h":218,"bis_at_clear_pct":99.9},{"year":2025,"days":290,"unit_responses":9941,"measured":9738,"excluded":203,"excluded_pct":2.0,"filled_dispatch":35,"recorded_h":2370,"turnout_fill_h":1,"return_h":469,"return_canceled_h":81,"cancel_end_used":368,"canceled_return_n":1453,"canceled_return_dropped":6,"total_h":2921,"min_per_response":18.0,"median_min_per_response":15.0,"stale_excluded":0,"stale_h":0,"bis_at_clear_pct":99.9},{"year":2026,"days":290,"unit_responses":10256,"measured":9909,"excluded":347,"excluded_pct":3.4,"filled_dispatch":427,"recorded_h":2396,"turnout_fill_h":14,"return_h":481,"return_canceled_h":65,"cancel_end_used":277,"canceled_return_n":1151,"canceled_return_dropped":0,"total_h":2956,"min_per_response":17.9,"median_min_per_response":15.0,"stale_excluded":0,"stale_h":0,"bis_at_clear_pct":100.0,"h901_per_resp":0.2928954517708722,"h901_window":940.4872956362705,"n901_measured":3211,"n901_resp":3290}],"conc_resp":[{"condition":"No other incident active","measured":3122,"p50_s":297.0,"p90_s":490.0},{"condition":"Another incident active, first-due engine free","measured":439,"p50_s":298.0,"p90_s":486.0},{"condition":"Another incident active, first-due engine committed","measured":267,"p50_s":383.0,"p90_s":584.0}],"conc_trend":[{"year":2024,"projected":false,"incidents_full":5596,"overlapping_full":1181,"share_full_pct":21.2,"two_plus_full":183,"overlapping_window":956,"share_window_pct":21.7,"not_measured":19},{"year":2025,"projected":false,"incidents_full":5987,"overlapping_full":1325,"share_full_pct":22.4,"two_plus_full":203,"overlapping_window":1045,"share_window_pct":22.3,"not_measured":66},{"year":2026,"projected":true,"incidents_full":6174,"overlapping_full":1277,"share_full_pct":null,"two_plus_full":null,"overlapping_window":1007,"share_window_pct":21.2,"not_measured":127}],"findings":[{"id":1,"strength":"Shown by the data","topic":"Demand","statement":"Incidents from January 1 to October 17 rose 3.1% over the same days of 2025 (4,733 to 4,881), and have risen every year since 2021 on that same calendar window."},{"id":2,"strength":"Shown by the data","topic":"Workload","statement":"Engine 901 attended 67.4% of all 2026 incidents, and its volume grew 5.8% against 3.1% for the department."},{"id":3,"strength":"Shown by the data","topic":"Workload","statement":"Truck (931/932) and Command (963/964/965) run almost no medical calls (0.7% and 1.9% of their incidents), so medical demand \u2014 47.6% of all incidents (35.8% illness, 11.8% injury/trauma) \u2014 falls on the four engines."},{"id":4,"strength":"Shown by the data","topic":"Response","statement":"When the first-due engine was already committed to another call, the first engine to arrive took 1:24 longer on a typical call (median) and 1:28 longer for the slowest 10% of calls, almost all of it extra travel from a farther station. This occurred on 427 in-area incidents."},{"id":5,"strength":"Shown by the data","topic":"Response","statement":"Measured from dispatch to the first engine, the median engine was en route 1:54 after dispatch (90% within 3:22), and 90% of in-area responses had engine travel within 6:10. NFPA 1710 sets 60\u201380 s turnout and 4:00 travel at the 90th percentile."},{"id":6,"strength":"Counter-evidence","topic":"Concurrency","statement":"Incidents that began while another was already under way rose from 1,181 in 2024 to 1,325 in 2025 (full years), and are projected at about 1,277 for 2026. That is up 8.1% since 2024 against 10.3% more incidents. The share has stayed near 21\u201322% because incidents are clearing faster: more calls, each tying the department up for less time. The 2026 projection is a slight undercount: 127 incidents so far have no end time recorded."},{"id":7,"strength":"Counter-evidence","topic":"Concurrency","statement":"When another incident is active but the first-due engine is free, the first engine arrives no later than when the department is idle (90th-percentile difference -4 s). The slowdown under concurrency comes from the cases where the first-due engine is the unit tied up."},{"id":8,"strength":"Counter-evidence","topic":"Call types","statement":"Under the old NFIRS coding, fire incidents and hazardous-condition incidents both fell from their 2022 level through 2025. Growth over the same period came mainly from medical calls, with smaller increases in false alarms and good-intent calls."},{"id":9,"strength":"Suggests","topic":"Time of day","statement":"63.3% of incidents fall between 9:00 and 21:00. If staffing is flat across 24 hours, the department is most stretched during these hours \u2014 but the data contains no roster, so this cannot be tested here."},{"id":10,"strength":"Suggests","topic":"Structure fires","statement":"29 of 36 confirmed 2026 structure fires (80.6%) were worked with 11 or fewer department personnel on the report, short of the 15-person NFPA 1710 residential assignment."},{"id":11,"strength":"Cannot be established from this data","topic":"Staffing","statement":"Whether units were out of service, short-staffed, or on training is not recorded in the incident export. Any claim about on-duty strength needs the roster and unit-status logs alongside."},{"id":12,"strength":"Cannot be established from this data","topic":"Trends","statement":"Incident types cannot be compared across the November 2025 switch from NFIRS to NERIS, and response times cannot be compared with earlier years because fire zone was not recorded before mid-2025."},{"id":13,"strength":"Counter-evidence","topic":"Committed hours","statement":"Time units spend committed to incidents is not rising with incident volume. Over the same window, front-line committed hours were 2,728 in 2024, 2,921 in 2025 and 2,956 in 2026, while incidents grew, and the typical (median) response took 14.7 minutes in 2024 and 15.0 in 2026."},{"id":14,"strength":"Suggests","topic":"Committed hours","statement":"Engine 901 was committed to incidents about 13.5% of all hours so far in 2026 once the unrecorded drive back to quarters is included (11.1% on recorded time alone), projected to about 16.2% by 2031 if growth continues (range 15.8\u201317.3%). The return legs are estimates."},{"id":15,"strength":"Suggests","topic":"Demand","statement":"If incidents keep growing at 2026's rate of 3.1% a year, they would reach about 7,202 by 2031 (range 7,009\u20137,668), roughly 1,028 more than 2026. This assumes no change in the service area or what the department responds to, and one year's growth rate is a thin basis for five years."},{"id":16,"strength":"Shown by the data","topic":"Response","statement":"Town addresses wait longer for the first engine because of distance: median engine travel is 3:55 in the Town against 2:47 in the City, and travel is within 4:00 on 51.7% of Town responses against 75.3% in the City."}],"first_due":[{"condition":"First-due engine available","measured":3591,"p50_s":298.0,"p90_s":493.0,"travel_p90_s":360.0,"travel_within_240_pct":71.8,"first_due_arrived_first_pct":87.6},{"condition":"First-due engine committed elsewhere","measured":272,"p50_s":382.5,"p90_s":581.0,"travel_p90_s":452.0,"travel_within_240_pct":45.2,"first_due_arrived_first_pct":6.2}],"groups":[{"group":"Medical \u2013 Illness","incidents":1748,"share_pct":35.8,"unit_person_hours":1016.0,"person_hours_share_pct":21.8,"person_hours_per_incident":0.62},{"group":"Medical \u2013 Injury/Trauma","incidents":576,"share_pct":11.8,"unit_person_hours":377.0,"person_hours_share_pct":8.1,"person_hours_per_incident":0.7},{"group":"Public Service","incidents":1562,"share_pct":32.0,"unit_person_hours":1862.0,"person_hours_share_pct":39.9,"person_hours_per_incident":1.21},{"group":"No Emergency","incidents":472,"share_pct":9.7,"unit_person_hours":359.0,"person_hours_share_pct":7.7,"person_hours_per_incident":0.82},{"group":"Hazardous Situation","incidents":223,"share_pct":4.6,"unit_person_hours":520.0,"person_hours_share_pct":11.1,"person_hours_per_incident":2.41},{"group":"Rescue","incidents":163,"share_pct":3.3,"unit_person_hours":205.0,"person_hours_share_pct":4.4,"person_hours_per_incident":1.27},{"group":"Fire","incidents":90,"share_pct":1.8,"unit_person_hours":290.0,"person_hours_share_pct":6.2,"person_hours_per_incident":3.22},{"group":"Law Enforcement Support","incidents":16,"share_pct":0.3,"unit_person_hours":13.0,"person_hours_share_pct":0.3,"person_hours_per_incident":0.85},{"group":"Not coded","incidents":31,"share_pct":0.6,"unit_person_hours":25.0,"person_hours_share_pct":0.5,"person_hours_per_incident":0.88}],"hour_dow":[{"day":"Mon","dow":0,"hour":0,"incidents":18},{"day":"Mon","dow":0,"hour":1,"incidents":17},{"day":"Mon","dow":0,"hour":2,"incidents":12},{"day":"Mon","dow":0,"hour":3,"incidents":12},{"day":"Mon","dow":0,"hour":4,"incidents":13},{"day":"Mon","dow":0,"hour":5,"incidents":13},{"day":"Mon","dow":0,"hour":6,"incidents":18},{"day":"Mon","dow":0,"hour":7,"incidents":19},{"day":"Mon","dow":0,"hour":8,"incidents":33},{"day":"Mon","dow":0,"hour":9,"incidents":31},{"day":"Mon","dow":0,"hour":10,"incidents":28},{"day":"Mon","dow":0,"hour":11,"incidents":45},{"day":"Mon","dow":0,"hour":12,"incidents":28},{"day":"Mon","dow":0,"hour":13,"incidents":45},{"day":"Mon","dow":0,"hour":14,"incidents":42},{"day":"Mon","dow":0,"hour":15,"incidents":34},{"day":"Mon","dow":0,"hour":16,"incidents":33},{"day":"Mon","dow":0,"hour":17,"incidents":42},{"day":"Mon","dow":0,"hour":18,"incidents":51},{"day":"Mon","dow":0,"hour":19,"incidents":29},{"day":"Mon","dow":0,"hour":20,"incidents":21},{"day":"Mon","dow":0,"hour":21,"incidents":26},{"day":"Mon","dow":0,"hour":22,"incidents":32},{"day":"Mon","dow":0,"hour":23,"incidents":29},{"day":"Tue","dow":1,"hour":0,"incidents":18},{"day":"Tue","dow":1,"hour":1,"incidents":20},{"day":"Tue","dow":1,"hour":2,"incidents":16},{"day":"Tue","dow":1,"hour":3,"incidents":16},{"day":"Tue","dow":1,"hour":4,"incidents":6},{"day":"Tue","dow":1,"hour":5,"incidents":16},{"day":"Tue","dow":1,"hour":6,"incidents":16},{"day":"Tue","dow":1,"hour":7,"incidents":26},{"day":"Tue","dow":1,"hour":8,"incidents":28},{"day":"Tue","dow":1,"hour":9,"incidents":33},{"day":"Tue","dow":1,"hour":10,"incidents":46},{"day":"Tue","dow":1,"hour":11,"incidents":32},{"day":"Tue","dow":1,"hour":12,"incidents":30},{"day":"Tue","dow":1,"hour":13,"incidents":34},{"day":"Tue","dow":1,"hour":14,"incidents":41},{"day":"Tue","dow":1,"hour":15,"incidents":47},{"day":"Tue","dow":1,"hour":16,"incidents":37},{"day":"Tue","dow":1,"hour":17,"incidents":45},{"day":"Tue","dow":1,"hour":18,"incidents":42},{"day":"Tue","dow":1,"hour":19,"incidents":41},{"day":"Tue","dow":1,"hour":20,"incidents":36},{"day":"Tue","dow":1,"hour":21,"incidents":35},{"day":"Tue","dow":1,"hour":22,"incidents":27},{"day":"Tue","dow":1,"hour":23,"incidents":21},{"day":"Wed","dow":2,"hour":0,"incidents":12},{"day":"Wed","dow":2,"hour":1,"incidents":20},{"day":"Wed","dow":2,"hour":2,"incidents":13},{"day":"Wed","dow":2,"hour":3,"incidents":11},{"day":"Wed","dow":2,"hour":4,"incidents":12},{"day":"Wed","dow":2,"hour":5,"incidents":18},{"day":"Wed","dow":2,"hour":6,"incidents":19},{"day":"Wed","dow":2,"hour":7,"incidents":24},{"day":"Wed","dow":2,"hour":8,"incidents":32},{"day":"Wed","dow":2,"hour":9,"incidents":47},{"day":"Wed","dow":2,"hour":10,"incidents":35},{"day":"Wed","dow":2,"hour":11,"incidents":43},{"day":"Wed","dow":2,"hour":12,"incidents":41},{"day":"Wed","dow":2,"hour":13,"incidents":42},{"day":"Wed","dow":2,"hour":14,"incidents":50},{"day":"Wed","dow":2,"hour":15,"incidents":30},{"day":"Wed","dow":2,"hour":16,"incidents":33},{"day":"Wed","dow":2,"hour":17,"incidents":41},{"day":"Wed","dow":2,"hour":18,"incidents":42},{"day":"Wed","dow":2,"hour":19,"incidents":39},{"day":"Wed","dow":2,"hour":20,"incidents":43},{"day":"Wed","dow":2,"hour":21,"incidents":35},{"day":"Wed","dow":2,"hour":22,"incidents":37},{"day":"Wed","dow":2,"hour":23,"incidents":31},{"day":"Thu","dow":3,"hour":0,"incidents":14},{"day":"Thu","dow":3,"hour":1,"incidents":23},{"day":"Thu","dow":3,"hour":2,"incidents":18},{"day":"Thu","dow":3,"hour":3,"incidents":16},{"day":"Thu","dow":3,"hour":4,"incidents":10},{"day":"Thu","dow":3,"hour":5,"incidents":10},{"day":"Thu","dow":3,"hour":6,"incidents":15},{"day":"Thu","dow":3,"hour":7,"incidents":23},{"day":"Thu","dow":3,"hour":8,"incidents":38},{"day":"Thu","dow":3,"hour":9,"incidents":34},{"day":"Thu","dow":3,"hour":10,"incidents":40},{"day":"Thu","dow":3,"hour":11,"incidents":39},{"day":"Thu","dow":3,"hour":12,"incidents":39},{"day":"Thu","dow":3,"hour":13,"incidents":36},{"day":"Thu","dow":3,"hour":14,"incidents":31},{"day":"Thu","dow":3,"hour":15,"incidents":43},{"day":"Thu","dow":3,"hour":16,"incidents":34},{"day":"Thu","dow":3,"hour":17,"incidents":29},{"day":"Thu","dow":3,"hour":18,"incidents":35},{"day":"Thu","dow":3,"hour":19,"incidents":43},{"day":"Thu","dow":3,"hour":20,"incidents":32},{"day":"Thu","dow":3,"hour":21,"incidents":34},{"day":"Thu","dow":3,"hour":22,"incidents":25},{"day":"Thu","dow":3,"hour":23,"incidents":33},{"day":"Fri","dow":4,"hour":0,"incidents":31},{"day":"Fri","dow":4,"hour":1,"incidents":21},{"day":"Fri","dow":4,"hour":2,"incidents":18},{"day":"Fri","dow":4,"hour":3,"incidents":17},{"day":"Fri","dow":4,"hour":4,"incidents":17},{"day":"Fri","dow":4,"hour":5,"incidents":15},{"day":"Fri","dow":4,"hour":6,"incidents":13},{"day":"Fri","dow":4,"hour":7,"incidents":9},{"day":"Fri","dow":4,"hour":8,"incidents":28},{"day":"Fri","dow":4,"hour":9,"incidents":42},{"day":"Fri","dow":4,"hour":10,"incidents":45},{"day":"Fri","dow":4,"hour":11,"incidents":47},{"day":"Fri","dow":4,"hour":12,"incidents":40},{"day":"Fri","dow":4,"hour":13,"incidents":39},{"day":"Fri","dow":4,"hour":14,"incidents":40},{"day":"Fri","dow":4,"hour":15,"incidents":37},{"day":"Fri","dow":4,"hour":16,"incidents":41},{"day":"Fri","dow":4,"hour":17,"incidents":29},{"day":"Fri","dow":4,"hour":18,"incidents":31},{"day":"Fri","dow":4,"hour":19,"incidents":53},{"day":"Fri","dow":4,"hour":20,"incidents":30},{"day":"Fri","dow":4,"hour":21,"incidents":32},{"day":"Fri","dow":4,"hour":22,"incidents":36},{"day":"Fri","dow":4,"hour":23,"incidents":36},{"day":"Sat","dow":5,"hour":0,"incidents":33},{"day":"Sat","dow":5,"hour":1,"incidents":41},{"day":"Sat","dow":5,"hour":2,"incidents":13},{"day":"Sat","dow":5,"hour":3,"incidents":16},{"day":"Sat","dow":5,"hour":4,"incidents":11},{"day":"Sat","dow":5,"hour":5,"incidents":17},{"day":"Sat","dow":5,"hour":6,"incidents":17},{"day":"Sat","dow":5,"hour":7,"incidents":14},{"day":"Sat","dow":5,"hour":8,"incidents":19},{"day":"Sat","dow":5,"hour":9,"incidents":22},{"day":"Sat","dow":5,"hour":10,"incidents":28},{"day":"Sat","dow":5,"hour":11,"incidents":25},{"day":"Sat","dow":5,"hour":12,"incidents":37},{"day":"Sat","dow":5,"hour":13,"incidents":49},{"day":"Sat","dow":5,"hour":14,"incidents":43},{"day":"Sat","dow":5,"hour":15,"incidents":32},{"day":"Sat","dow":5,"hour":16,"incidents":33},{"day":"Sat","dow":5,"hour":17,"incidents":40},{"day":"Sat","dow":5,"hour":18,"incidents":33},{"day":"Sat","dow":5,"hour":19,"incidents":38},{"day":"Sat","dow":5,"hour":20,"incidents":27},{"day":"Sat","dow":5,"hour":21,"incidents":36},{"day":"Sat","dow":5,"hour":22,"incidents":24},{"day":"Sat","dow":5,"hour":23,"incidents":32},{"day":"Sun","dow":6,"hour":0,"incidents":36},{"day":"Sun","dow":6,"hour":1,"incidents":23},{"day":"Sun","dow":6,"hour":2,"incidents":26},{"day":"Sun","dow":6,"hour":3,"incidents":14},{"day":"Sun","dow":6,"hour":4,"incidents":14},{"day":"Sun","dow":6,"hour":5,"incidents":11},{"day":"Sun","dow":6,"hour":6,"incidents":15},{"day":"Sun","dow":6,"hour":7,"incidents":13},{"day":"Sun","dow":6,"hour":8,"incidents":18},{"day":"Sun","dow":6,"hour":9,"incidents":26},{"day":"Sun","dow":6,"hour":10,"incidents":22},{"day":"Sun","dow":6,"hour":11,"incidents":31},{"day":"Sun","dow":6,"hour":12,"incidents":31},{"day":"Sun","dow":6,"hour":13,"incidents":40},{"day":"Sun","dow":6,"hour":14,"incidents":37},{"day":"Sun","dow":6,"hour":15,"incidents":31},{"day":"Sun","dow":6,"hour":16,"incidents":34},{"day":"Sun","dow":6,"hour":17,"incidents":32},{"day":"Sun","dow":6,"hour":18,"incidents":34},{"day":"Sun","dow":6,"hour":19,"incidents":40},{"day":"Sun","dow":6,"hour":20,"incidents":38},{"day":"Sun","dow":6,"hour":21,"incidents":27},{"day":"Sun","dow":6,"hour":22,"incidents":19},{"day":"Sun","dow":6,"hour":23,"incidents":18}],"hourly":[{"hour":0,"incidents":162},{"hour":1,"incidents":165},{"hour":2,"incidents":116},{"hour":3,"incidents":102},{"hour":4,"incidents":83},{"hour":5,"incidents":100},{"hour":6,"incidents":113},{"hour":7,"incidents":128},{"hour":8,"incidents":196},{"hour":9,"incidents":235},{"hour":10,"incidents":244},{"hour":11,"incidents":262},{"hour":12,"incidents":246},{"hour":13,"incidents":285},{"hour":14,"incidents":284},{"hour":15,"incidents":254},{"hour":16,"incidents":245},{"hour":17,"incidents":258},{"hour":18,"incidents":268},{"hour":19,"incidents":283},{"hour":20,"incidents":227},{"hour":21,"incidents":225},{"hour":22,"incidents":200},{"hour":23,"incidents":200}],"metrics":[{"metric":"ytd_2026","value":4881},{"metric":"same_window_2025","value":4733},{"metric":"growth_vs_2025_pct","value":3.1},{"metric":"remaining_2025","value":1254},{"metric":"projected_2026","value":6174},{"metric":"flat_projection_2026","value":6143},{"metric":"projection_gap","value":31},{"metric":"cagr_2022_2025_pct","value":4.5},{"metric":"cagr_2021_2025_pct","value":5.8},{"metric":"full_2025","value":5987},{"metric":"share_901_pct","value":67.4},{"metric":"inc_901_2026","value":3290},{"metric":"inc_901_2025","value":3111},{"metric":"growth_901_pct","value":5.8},{"metric":"resp_turn_p90","value":202.0},{"metric":"resp_trav_p90","value":370.0},{"metric":"resp_tot_p90","value":499.0},{"metric":"resp_tot_p50","value":301.0},{"metric":"inarea_incidents","value":4834},{"metric":"inarea_with_arrival","value":4269},{"metric":"resp_measured","value":3924},{"metric":"resp_excluded","value":345},{"metric":"meet_turn_ems_pct","value":15.6},{"metric":"meet_turn_fire_pct","value":21.0},{"metric":"meet_trav_pct","value":69.9},{"metric":"n_ems","value":1885},{"metric":"n_nonems","value":2039},{"metric":"fd_committed_inarea","value":427},{"metric":"fd_committed_measured","value":272},{"metric":"fd_delta_p50_s","value":84.0},{"metric":"fd_delta_p90_s","value":88.0},{"metric":"fd_ci_p90_lo","value":58.0},{"metric":"fd_ci_p90_hi","value":148.0},{"metric":"conc_share_2026_pct","value":21.2},{"metric":"conc_share_2024_pct","value":21.7},{"metric":"conc_delta_p90_all_s","value":56.0},{"metric":"conc_delta_p90_fdavail_s","value":-4.0},{"metric":"peak12_share_pct","value":63.3},{"metric":"peak12_start","value":9},{"metric":"peak12_incidents","value":3091},{"metric":"medical_share_pct","value":47.6},{"metric":"total_2026","value":4881},{"metric":"med_931_pct","value":0.7},{"metric":"med_963_pct","value":1.9},{"metric":"sf_n","value":36},{"metric":"sf_le11","value":29},{"metric":"sf_le11_pct","value":80.6},{"metric":"ph_medical_share_pct","value":29.8},{"metric":"ph_excluded","value":1189},{"metric":"ph_unit_total","value":10494},{"metric":"unit_responses_2026","value":10494},{"metric":"frontline_share_pct","value":97.9},{"metric":"reserve_incidents_2026","value":200},{"metric":"out_of_area","value":40},{"metric":"no_zone","value":7},{"metric":"fd_unclassified","value":61},{"metric":"conc_unclassified","value":96},{"metric":"p5_base_2026","value":6174},{"metric":"p5_low_rate_pct","value":2.6},{"metric":"p5_high_rate_pct","value":4.4},{"metric":"p5_low_2031","value":7009},{"metric":"p5_high_2031","value":7668},{"metric":"p5_central_rate_pct","value":3.1},{"metric":"p5_central_2031","value":7202},{"metric":"p5_central_increase","value":1028},{"metric":"p5_central_increase_pct","value":16.7},{"metric":"p901_min_per_resp","value":17.6},{"metric":"p901_share_pct","value":67.4},{"metric":"p901_2026_h","value":1219},{"metric":"p901_2026_share","value":13.9},{"metric":"p901_2031_h","value":1422},{"metric":"p901_2031_share","value":16.2},{"metric":"p901_2031_low_h","value":1384},{"metric":"p901_2031_high_h","value":1514},{"metric":"p901_2031_low_share","value":15.8},{"metric":"p901_2031_high_share","value":17.3},{"metric":"p901_2025_h","value":1112},{"metric":"med_2024","value":14.7},{"metric":"med_2026","value":15.0},{"metric":"stale_2024","value":15},{"metric":"stale_2024_h","value":218},{"metric":"illness_share_pct","value":35.8},{"metric":"injury_share_pct","value":11.8},{"metric":"mvc_reclassified","value":115},{"metric":"rz_filled","value":173},{"metric":"conc_n_2024","value":956},{"metric":"conc_n_2025","value":1045},{"metric":"conc_n_2026","value":1007},{"metric":"conc_n_change_pct","value":5.3},{"metric":"inc_change_24_26_pct","value":10.2},{"metric":"conc_full_2024","value":1181},{"metric":"conc_full_2025","value":1325},{"metric":"conc_proj_2026","value":1277},{"metric":"conc_full_change_pct","value":8.1},{"metric":"inc_full_change_pct","value":10.3},{"metric":"conc_proj_growth_pct","value":-3.6},{"metric":"data_through","value":"October 17, 2026"},{"metric":"fd_delta_mean_s","value":46.0},{"metric":"fd_delta_trav_p50_s","value":92.0}],"monthly":[{"year":2024,"month":1,"incidents":400,"partial":false},{"year":2024,"month":2,"incidents":383,"partial":false},{"year":2024,"month":3,"incidents":447,"partial":false},{"year":2024,"month":4,"incidents":440,"partial":false},{"year":2024,"month":5,"incidents":458,"partial":false},{"year":2024,"month":6,"incidents":446,"partial":false},{"year":2024,"month":7,"incidents":487,"partial":false},{"year":2024,"month":8,"incidents":563,"partial":false},{"year":2024,"month":9,"incidents":519,"partial":false},{"year":2024,"month":10,"incidents":508,"partial":false},{"year":2024,"month":11,"incidents":504,"partial":false},{"year":2024,"month":12,"incidents":441,"partial":false},{"year":2025,"month":1,"incidents":474,"partial":false},{"year":2025,"month":2,"incidents":395,"partial":false},{"year":2025,"month":3,"incidents":522,"partial":false},{"year":2025,"month":4,"incidents":472,"partial":false},{"year":2025,"month":5,"incidents":491,"partial":false},{"year":2025,"month":6,"incidents":426,"partial":false},{"year":2025,"month":7,"incidents":529,"partial":false},{"year":2025,"month":8,"incidents":545,"partial":false},{"year":2025,"month":9,"incidents":582,"partial":false},{"year":2025,"month":10,"incidents":596,"partial":false},{"year":2025,"month":11,"incidents":485,"partial":false},{"year":2025,"month":12,"incidents":470,"partial":false},{"year":2026,"month":1,"incidents":442,"partial":false},{"year":2026,"month":2,"incidents":450,"partial":false},{"year":2026,"month":3,"incidents":513,"partial":false},{"year":2026,"month":4,"incidents":480,"partial":false},{"year":2026,"month":5,"incidents":490,"partial":false},{"year":2026,"month":6,"incidents":530,"partial":false},{"year":2026,"month":7,"incidents":543,"partial":false},{"year":2026,"month":8,"incidents":526,"partial":false},{"year":2026,"month":9,"incidents":597,"partial":false},{"year":2026,"month":10,"incidents":310,"partial":true}],"nfirs":[{"series":"Fire","year":2021,"incidents":134},{"series":"Fire","year":2022,"incidents":152},{"series":"Fire","year":2023,"incidents":143},{"series":"Fire","year":2024,"incidents":116},{"series":"Fire","year":2025,"incidents":121},{"series":"False Alarm & False Call","year":2021,"incidents":1175},{"series":"False Alarm & False Call","year":2022,"incidents":1294},{"series":"False Alarm & False Call","year":2023,"incidents":1327},{"series":"False Alarm & False Call","year":2024,"incidents":1313},{"series":"False Alarm & False Call","year":2025,"incidents":1407},{"series":"Rescue & EMS","year":2021,"incidents":1589},{"series":"Rescue & EMS","year":2022,"incidents":1730},{"series":"Rescue & EMS","year":2023,"incidents":1808},{"series":"Rescue & EMS","year":2024,"incidents":1934},{"series":"Rescue & EMS","year":2025,"incidents":2265},{"series":"Good Intent","year":2021,"incidents":748},{"series":"Good Intent","year":2022,"incidents":754},{"series":"Good Intent","year":2023,"incidents":891},{"series":"Good Intent","year":2024,"incidents":974},{"series":"Good Intent","year":2025,"incidents":932},{"series":"Hazardous Condition","year":2021,"incidents":215},{"series":"Hazardous Condition","year":2022,"incidents":263},{"series":"Hazardous Condition","year":2023,"incidents":242},{"series":"Hazardous Condition","year":2024,"incidents":155},{"series":"Hazardous Condition","year":2025,"incidents":155},{"series":"Service Call","year":2021,"incidents":324},{"series":"Service Call","year":2022,"incidents":290},{"series":"Service Call","year":2023,"incidents":298},{"series":"Service Call","year":2024,"incidents":343},{"series":"Service Call","year":2025,"incidents":301}],"proj901":[{"year":2024,"actual_h":1148,"actual_share_pct":13.1},{"year":2025,"actual_h":1112,"actual_share_pct":12.7},{"year":2026,"resp_central":4162,"low_h":1219,"central_h":1219,"high_h":1219,"low_share_pct":13.9,"central_share_pct":13.9,"high_share_pct":13.9},{"year":2027,"resp_central":4292,"low_h":1250,"central_h":1257,"high_h":1273,"low_share_pct":14.3,"central_share_pct":14.3,"high_share_pct":14.5},{"year":2028,"resp_central":4426,"low_h":1282,"central_h":1296,"high_h":1329,"low_share_pct":14.6,"central_share_pct":14.8,"high_share_pct":15.1},{"year":2029,"resp_central":4564,"low_h":1315,"central_h":1337,"high_h":1388,"low_share_pct":15.0,"central_share_pct":15.3,"high_share_pct":15.8},{"year":2030,"resp_central":4707,"low_h":1349,"central_h":1379,"high_h":1450,"low_share_pct":15.4,"central_share_pct":15.7,"high_share_pct":16.6},{"year":2031,"resp_central":4854,"low_h":1384,"central_h":1422,"high_h":1514,"low_share_pct":15.8,"central_share_pct":16.2,"high_share_pct":17.3}],"projection5":[{"year":2021,"actual":4783,"low":null,"central":null,"high":null},{"year":2022,"actual":5241,"low":null,"central":null,"high":null},{"year":2023,"actual":5347,"low":null,"central":null,"high":null},{"year":2024,"actual":5596,"low":null,"central":null,"high":null},{"year":2025,"actual":5987,"low":null,"central":null,"high":null},{"year":2026,"actual":null,"low":6174,"central":6174,"high":6174},{"year":2027,"actual":null,"low":6333,"central":6367,"high":6448},{"year":2028,"actual":null,"low":6496,"central":6566,"high":6733},{"year":2029,"actual":null,"low":6662,"central":6771,"high":7031},{"year":2030,"actual":null,"low":6834,"central":6983,"high":7343},{"year":2031,"actual":null,"low":7009,"central":7202,"high":7668}],"reconcile":[{"item":"First-due engine unavailable","earlier":"652 occurrences; +56 s at the median, +1:23 at the 90th percentile","this_dashboard":"427 in-area incidents with the first-due engine committed at dispatch; first engine +1:24 at the median, +1:28 at the 90th percentile","note":"An earlier version of this dashboard measured the first front-line unit, including Truck and Command, which showed only +0:40 at the median; corrected to first-arriving engine (901\u2013904) on Oct 23, 2026. Count differs from the earlier 652 because this uses a narrower definition (first-due engine demonstrably on another call at dispatch)."},{"item":"Response under concurrent incidents","earlier":"Does not degrade measurably","this_dashboard":"Degrades 54 s at the 90th percentile overall, but by 4 s when the first-due engine is free","note":"The earlier statement holds once the first-due effect is separated out; the raw comparison alone would contradict it."},{"item":"Annual demand growth","earlier":"About 3.4% a year","this_dashboard":"3.1% (2026 vs 2025, same window); 4.5% a year compound, 2022\u20132025 full years","note":"2021 is excluded from the growth rate because its volume was depressed by COVID-19."},{"item":"Fire alarms declining","earlier":"Fire alarms and other fires declining","this_dashboard":"Fire and hazardous-condition series declined; the NFIRS false-alarm series did not (rose through 2025)","note":"The earlier claim should be traced to its source before it is repeated."},{"item":"Response time basis","earlier":"Export field 'Time to First Arrival' (from call receipt)","this_dashboard":"Turnout + travel from dispatch, first-arriving engine (901\u2013904), in-area only","note":"Times look faster on this basis because the pre-dispatch interval is removed. That is a change in what is measured, not an improvement in performance."}],"resp_funnel":[{"stage":"In-area incidents","count":4834},{"stage":"No engine arrived (canceled, or Truck/Command/reserve only)","count":565},{"stage":"Excluded: No en-route time recorded","count":194},{"stage":"Excluded: Negative interval","count":9},{"stage":"Excluded: Zero turnout or travel (unrecorded)","count":17},{"stage":"Excluded: Turnout over 6 minutes","count":28},{"stage":"Excluded: Arrival stamped on departure","count":97},{"stage":"Measured","count":3924}],"response":[{"component":"Travel (en route to on scene)","p50":179.5,"p80":295.0,"p90":370.0,"mean":208.1,"nfpa_90th":"240 s","measured":3924},{"component":"Turnout (dispatch to en route)","p50":114.0,"p80":169.0,"p90":202.0,"mean":120.6,"nfpa_90th":"60 s EMS / 80 s fire","measured":3924},{"component":"Turnout + travel, per call","p50":301.0,"p80":422.0,"p90":499.0,"mean":328.7,"nfpa_90th":"Not comparable (see note)","measured":3924}],"sf_personnel":[{"personnel":2,"incidents":1},{"personnel":5,"incidents":1},{"personnel":6,"incidents":2},{"personnel":7,"incidents":6},{"personnel":8,"incidents":2},{"personnel":9,"incidents":9},{"personnel":10,"incidents":2},{"personnel":11,"incidents":6},{"personnel":12,"incidents":3},{"personnel":13,"incidents":2},{"personnel":14,"incidents":1},{"personnel":15,"incidents":1}],"subgroups":[{"group":"Medical \u2013 Illness","subgroup":"Illness","incidents":1740},{"group":"Public Service","subgroup":"Alarms (Non Medical)","incidents":1318},{"group":"Medical \u2013 Injury/Trauma","subgroup":"Injury / Trauma","incidents":571},{"group":"No Emergency","subgroup":"Good Intent","incidents":228},{"group":"Public Service","subgroup":"Citizen Assist","incidents":175},{"group":"No Emergency","subgroup":"Cancelled","incidents":168},{"group":"Rescue","subgroup":"Motor Vehicle Collision (medical)","incidents":115},{"group":"Hazardous Situation","subgroup":"Hazardous Materials","incidents":105},{"group":"No Emergency","subgroup":"False Alarm","incidents":76},{"group":"Public Service","subgroup":"Disaster / Weather","incidents":61},{"group":"Hazardous Situation","subgroup":"Hazard Non-Chemical","incidents":60},{"group":"Hazardous Situation","subgroup":"Investigation","incidents":52}],"turnout_split":[{"type":"Medical (EMS)","measured":1885,"p50":106.0,"p90":203.0,"benchmark_s":60,"within_benchmark_pct":15.6},{"type":"All other","measured":2039,"p50":121.0,"p90":202.0,"benchmark_s":80,"within_benchmark_pct":21.0}],"unit_area_mix":[{"unit":"901","area":"901 area","incidents":2326,"share_pct":70.7,"home":"901 area"},{"unit":"901","area":"902 area","incidents":634,"share_pct":19.3,"home":"901 area"},{"unit":"901","area":"903 area","incidents":196,"share_pct":6.0,"home":"901 area"},{"unit":"901","area":"904 area","incidents":77,"share_pct":2.3,"home":"901 area"},{"unit":"901","area":"No response zone","incidents":57,"share_pct":1.7,"home":"901 area"},{"unit":"902","area":"901 area","incidents":516,"share_pct":29.0,"home":"902 area"},{"unit":"902","area":"902 area","incidents":1186,"share_pct":66.6,"home":"902 area"},{"unit":"902","area":"903 area","incidents":30,"share_pct":1.7,"home":"902 area"},{"unit":"902","area":"904 area","incidents":14,"share_pct":0.8,"home":"902 area"},{"unit":"902","area":"No response zone","incidents":34,"share_pct":1.9,"home":"902 area"},{"unit":"903","area":"901 area","incidents":356,"share_pct":37.6,"home":"903 area"},{"unit":"903","area":"902 area","incidents":163,"share_pct":17.2,"home":"903 area"},{"unit":"903","area":"903 area","incidents":402,"share_pct":42.4,"home":"903 area"},{"unit":"903","area":"904 area","incidents":9,"share_pct":1.0,"home":"903 area"},{"unit":"903","area":"No response zone","incidents":17,"share_pct":1.8,"home":"903 area"},{"unit":"904","area":"901 area","incidents":627,"share_pct":60.3,"home":"904 area"},{"unit":"904","area":"902 area","incidents":60,"share_pct":5.8,"home":"904 area"},{"unit":"904","area":"903 area","incidents":17,"share_pct":1.6,"home":"904 area"},{"unit":"904","area":"904 area","incidents":307,"share_pct":29.5,"home":"904 area"},{"unit":"904","area":"No response zone","incidents":29,"share_pct":2.8,"home":"904 area"},{"unit":"Truck","area":"901 area","incidents":706,"share_pct":45.3,"home":"901 area"},{"unit":"Truck","area":"902 area","incidents":606,"share_pct":38.9,"home":"901 area"},{"unit":"Truck","area":"903 area","incidents":172,"share_pct":11.0,"home":"901 area"},{"unit":"Truck","area":"904 area","incidents":57,"share_pct":3.7,"home":"901 area"},{"unit":"Truck","area":"No response zone","incidents":16,"share_pct":1.0,"home":"901 area"},{"unit":"Command","area":"901 area","incidents":758,"share_pct":46.2,"home":"901 area"},{"unit":"Command","area":"902 area","incidents":625,"share_pct":38.1,"home":"901 area"},{"unit":"Command","area":"903 area","incidents":175,"share_pct":10.7,"home":"901 area"},{"unit":"Command","area":"904 area","incidents":59,"share_pct":3.6,"home":"901 area"},{"unit":"Command","area":"No response zone","incidents":25,"share_pct":1.5,"home":"901 area"}],"unit_areas":[{"unit":"901","total":3290,"a901":2326,"a902":634,"a903":196,"a904":77,"none":57,"home":"901 area","own_pct":71.9,"outside_pct":28.1},{"unit":"902","total":1780,"a901":516,"a902":1186,"a903":30,"a904":14,"none":34,"home":"902 area","own_pct":67.9,"outside_pct":32.1},{"unit":"903","total":947,"a901":356,"a902":163,"a903":402,"a904":9,"none":17,"home":"903 area","own_pct":43.2,"outside_pct":56.8},{"unit":"904","total":1040,"a901":627,"a902":60,"a903":17,"a904":307,"none":29,"home":"904 area","own_pct":30.4,"outside_pct":69.6},{"unit":"Truck","total":1557,"a901":706,"a902":606,"a903":172,"a904":57,"none":16,"home":"901 area","own_pct":45.8,"outside_pct":54.2},{"unit":"Command","total":1642,"a901":758,"a902":625,"a903":175,"a904":59,"none":25,"home":"901 area","own_pct":46.9,"outside_pct":53.1}],"unit_mix":[{"position":"901","group":"Medical \u2013 Illness","incidents":1003},{"position":"901","group":"Medical \u2013 Injury/Trauma","incidents":315},{"position":"901","group":"Public Service","incidents":1239},{"position":"901","group":"No Emergency","incidents":327},{"position":"901","group":"Hazardous Situation","incidents":169},{"position":"901","group":"Rescue","incidents":135},{"position":"901","group":"Fire","incidents":75},{"position":"901","group":"Law Enforcement Support","incidents":9},{"position":"901","group":"Not coded","incidents":18},{"position":"902","group":"Medical \u2013 Illness","incidents":433},{"position":"902","group":"Medical \u2013 Injury/Trauma","incidents":106},{"position":"902","group":"Public Service","incidents":801},{"position":"902","group":"No Emergency","incidents":201},{"position":"902","group":"Hazardous Situation","incidents":112},{"position":"902","group":"Rescue","incidents":63},{"position":"902","group":"Fire","incidents":51},{"position":"902","group":"Law Enforcement Support","incidents":5},{"position":"902","group":"Not coded","incidents":8},{"position":"903","group":"Medical \u2013 Illness","incidents":176},{"position":"903","group":"Medical \u2013 Injury/Trauma","incidents":102},{"position":"903","group":"Public Service","incidents":464},{"position":"903","group":"No Emergency","incidents":70},{"position":"903","group":"Hazardous Situation","incidents":57},{"position":"903","group":"Rescue","incidents":39},{"position":"903","group":"Fire","incidents":37},{"position":"903","group":"Law Enforcement Support","incidents":0},{"position":"903","group":"Not coded","incidents":2},{"position":"904","group":"Medical \u2013 Illness","incidents":274},{"position":"904","group":"Medical \u2013 Injury/Trauma","incidents":101},{"position":"904","group":"Public Service","incidents":390},{"position":"904","group":"No Emergency","incidents":89},{"position":"904","group":"Hazardous Situation","incidents":64},{"position":"904","group":"Rescue","incidents":68},{"position":"904","group":"Fire","incidents":45},{"position":"904","group":"Law Enforcement Support","incidents":1},{"position":"904","group":"Not coded","incidents":8},{"position":"931/932","group":"Medical \u2013 Illness","incidents":3},{"position":"931/932","group":"Medical \u2013 Injury/Trauma","incidents":8},{"position":"931/932","group":"Public Service","incidents":1222},{"position":"931/932","group":"No Emergency","incidents":139},{"position":"931/932","group":"Hazardous Situation","incidents":137},{"position":"931/932","group":"Rescue","incidents":4},{"position":"931/932","group":"Fire","incidents":41},{"position":"931/932","group":"Law Enforcement Support","incidents":1},{"position":"931/932","group":"Not coded","incidents":2},{"position":"963/964/965","group":"Medical \u2013 Illness","incidents":13},{"position":"963/964/965","group":"Medical \u2013 Injury/Trauma","incidents":18},{"position":"963/964/965","group":"Public Service","incidents":1241},{"position":"963/964/965","group":"No Emergency","incidents":156},{"position":"963/964/965","group":"Hazardous Situation","incidents":144},{"position":"963/964/965","group":"Rescue","incidents":13},{"position":"963/964/965","group":"Fire","incidents":52},{"position":"963/964/965","group":"Law Enforcement Support","incidents":3},{"position":"963/964/965","group":"Not coded","incidents":2}],"units":[{"position":"901","incidents_2025":3111,"incidents_2026":3290,"share_2026_pct":67.4,"change_pct":5.8,"medical_pct":40.1},{"position":"902","incidents_2025":1853,"incidents_2026":1780,"share_2026_pct":36.5,"change_pct":-3.9,"medical_pct":30.3},{"position":"903","incidents_2025":911,"incidents_2026":947,"share_2026_pct":19.4,"change_pct":4.0,"medical_pct":29.4},{"position":"904","incidents_2025":922,"incidents_2026":1040,"share_2026_pct":21.3,"change_pct":12.8,"medical_pct":36.1},{"position":"931/932","incidents_2025":1539,"incidents_2026":1557,"share_2026_pct":31.9,"change_pct":1.2,"medical_pct":0.7},{"position":"963/964/965","incidents_2025":1605,"incidents_2026":1642,"share_2026_pct":33.6,"change_pct":2.3,"medical_pct":1.9}],"zones":[{"zone":"1-2","jurisdiction":"City","incidents":761,"measured":632,"travel_median_s":178.0,"travel_p90_s":333.0,"within_240s_pct":75.6,"small_sample":false},{"zone":"4-1","jurisdiction":"City","incidents":497,"measured":395,"travel_median_s":151.0,"travel_p90_s":288.0,"within_240s_pct":84.3,"small_sample":false},{"zone":"2-3","jurisdiction":"City","incidents":483,"measured":418,"travel_median_s":116.0,"travel_p90_s":262.0,"within_240s_pct":87.3,"small_sample":false},{"zone":"2-2","jurisdiction":"City","incidents":318,"measured":253,"travel_median_s":112.0,"travel_p90_s":278.0,"within_240s_pct":84.6,"small_sample":false},{"zone":"1-4","jurisdiction":"City","incidents":290,"measured":249,"travel_median_s":186.0,"travel_p90_s":329.0,"within_240s_pct":73.9,"small_sample":false},{"zone":"5-2","jurisdiction":"City","incidents":251,"measured":155,"travel_median_s":306.0,"travel_p90_s":473.0,"within_240s_pct":21.9,"small_sample":false},{"zone":"ITH-3","jurisdiction":"Town","incidents":242,"measured":194,"travel_median_s":142.0,"travel_p90_s":310.0,"within_240s_pct":79.9,"small_sample":false},{"zone":"1-1","jurisdiction":"City","incidents":231,"measured":178,"travel_median_s":255.0,"travel_p90_s":405.0,"within_240s_pct":45.5,"small_sample":false},{"zone":"ITH-4","jurisdiction":"Town","incidents":209,"measured":180,"travel_median_s":247.0,"travel_p90_s":395.0,"within_240s_pct":48.3,"small_sample":false},{"zone":"1-3","jurisdiction":"City","incidents":208,"measured":179,"travel_median_s":86.0,"travel_p90_s":224.0,"within_240s_pct":90.5,"small_sample":false},{"zone":"3-2","jurisdiction":"City","incidents":197,"measured":174,"travel_median_s":142.0,"travel_p90_s":311.0,"within_240s_pct":81.6,"small_sample":false},{"zone":"ITH-10","jurisdiction":"Town","incidents":168,"measured":145,"travel_median_s":263.0,"travel_p90_s":451.0,"within_240s_pct":44.1,"small_sample":false},{"zone":"ITH-11","jurisdiction":"Town","incidents":159,"measured":109,"travel_median_s":211.0,"travel_p90_s":397.0,"within_240s_pct":56.9,"small_sample":false},{"zone":"ITH-2","jurisdiction":"Town","incidents":138,"measured":111,"travel_median_s":392.0,"travel_p90_s":589.0,"within_240s_pct":4.5,"small_sample":false},{"zone":"3-1","jurisdiction":"City","incidents":131,"measured":120,"travel_median_s":174.0,"travel_p90_s":295.0,"within_240s_pct":79.2,"small_sample":false},{"zone":"5-1","jurisdiction":"City","incidents":123,"measured":107,"travel_median_s":211.0,"travel_p90_s":319.0,"within_240s_pct":71.0,"small_sample":false},{"zone":"2-1","jurisdiction":"City","incidents":122,"measured":100,"travel_median_s":220.0,"travel_p90_s":393.0,"within_240s_pct":54.0,"small_sample":false},{"zone":"ITH-1","jurisdiction":"Town","incidents":100,"measured":79,"travel_median_s":170.0,"travel_p90_s":538.0,"within_240s_pct":62.0,"small_sample":false},{"zone":"1-5","jurisdiction":"City","incidents":86,"measured":63,"travel_median_s":123.0,"travel_p90_s":212.0,"within_240s_pct":92.1,"small_sample":false},{"zone":"ITH-12","jurisdiction":"Town","incidents":60,"measured":45,"travel_median_s":198.0,"travel_p90_s":615.0,"within_240s_pct":53.3,"small_sample":true},{"zone":"ITH-5","jurisdiction":"Town","incidents":34,"measured":23,"travel_median_s":220.0,"travel_p90_s":357.0,"within_240s_pct":65.2,"small_sample":true},{"zone":"ITH-13","jurisdiction":"Town","incidents":26,"measured":15,"travel_median_s":358.0,"travel_p90_s":519.0,"within_240s_pct":33.3,"small_sample":true}]};</script>
+<script>window.dash=(function(){
+  const D=window.__IFD_DATA; const subs=[];
+  const api={
+    data:(id)=>D[id]?{status:'ok',data:D[id],columns:Object.keys(D[id][0]||{}),meta:[],refreshing:false}:{status:'missing',data:[]},
+    onData:(fn)=>{subs.push(fn);fn();},
+    colors:['#2d6aa3','#e8a200','#ba1200','#7fa7cf','#f2cd6b','#7d2416','#3f8070','#8c6bb1'],
+    setLink:(id)=>{try{history.replaceState(null,'','#'+id);}catch(e){}},
+    params:()=>({}),setParams:()=>{},resetParams:()=>{},refresh:()=>{}
+  };
+  let t; window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(()=>subs.forEach(f=>f()),150);});
+  return api;
+})();</script>
+<script>
+(() => {
+const root = document.getElementById('ifd');
+const tip = document.getElementById('tip');
+const BRAND = ['#2d6aa3', '#e8a200', '#ba1200', '#7fa7cf', '#f2cd6b', '#7d2416', '#3f8070', '#8c6bb1'];
+const fmtInt = d3.format(',');
+const mmss = (s) => { if (s == null || isNaN(s)) return '—'; const neg = s < 0; s = Math.round(Math.abs(s)); return (neg ? '−' : '') + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const fmt = (v, f) => {
+  if (v === null || v === undefined || v === '') return '—';
+  switch (f) {
+    case 'int': return fmtInt(Math.round(+v));
+    case 'pct': return (+v).toFixed(1) + '%';
+    case 'spct': return (+v > 0 ? '+' : +v < 0 ? '−' : '') + Math.abs(+v).toFixed(1) + '%';
+    case 'mmss': return mmss(+v);
+    case 'smmss': return (+v >= 0 ? '+' : '') + mmss(+v);
+    case 'dec2': return (+v).toFixed(2);
+    case 'dec1': return (+v).toFixed(1);
+    case 'year': return String(v);
+    case 'flag': return v === true ? 'Small' : '';
+    default: return String(v);
+  }
+};
+const GROUPS = ['Medical – Illness','Medical – Injury/Trauma','Public Service','No Emergency','Hazardous Situation','Rescue','Fire','Law Enforcement Support','Not coded'];
+const gcolor = (g) => g === 'Not coded' ? 'var(--cds-chart-muted)' : BRAND[GROUPS.indexOf(g) % 8];
+
+// ---------- tabs
+const tabs = [...root.querySelectorAll('.ifd-tab')];
+let active = 'summary';
+function show(id, link) {
+  if (!document.getElementById(id) || !document.getElementById(id).classList.contains('ifd-page')) return;
+  active = id;
+  tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+  root.querySelectorAll('.ifd-page').forEach(p => { p.hidden = p.id !== id; });
+  if (link) dash.setLink(id);
+  draw();
+}
+tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab, true)));
+
+// ---------- tooltip
+function tipShow(ev, html) {
+  tip.replaceChildren();
+  html.forEach(([cls, txt]) => { const d = document.createElement('div'); if (cls) d.className = cls; d.textContent = txt; tip.appendChild(d); });
+  tip.style.display = 'block';
+  const r = root.getBoundingClientRect();
+  let x = ev.clientX - r.left + 12, y = ev.clientY - r.top + 12;
+  const w = tip.offsetWidth;
+  if (x + w > r.width) x = ev.clientX - r.left - w - 12;
+  tip.style.left = Math.max(0, x) + 'px'; tip.style.top = y + 'px';
+}
+const tipHide = () => { tip.style.display = 'none'; };
+
+// ---------- helpers
+const ok = (id) => dash.data(id).status === 'ok';
+function fail(el, ids) {
+  const bad = ids.some(id => dash.data(id).status === 'error' || dash.data(id).status === 'connect');
+  el.replaceChildren();
+  if (bad) { const d = document.createElement('div'); d.className = 'ifd-fail'; d.textContent = 'Failed to load'; el.appendChild(d); }
+  return bad;
+}
+function svgFor(el, h) {
+  el.replaceChildren();
+  const w = Math.max(260, el.clientWidth);
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`).attr('height', h);
+  return [svg, w];
+}
+function styleAxis(g) {
+  g.attr('font-size', null).attr('font-family', null);
+  g.selectAll('text').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)');
+  g.selectAll('.domain').attr('stroke', 'var(--cds-chart-axis)');
+  g.selectAll('.tick line').attr('stroke', 'var(--cds-chart-grid)');
+}
+function legend(id, items) {
+  const el = document.getElementById(id); if (!el) return;
+  el.replaceChildren();
+  items.forEach(([name, color, dashed]) => {
+    const s = document.createElement('span'); const b = document.createElement('b');
+    b.style.background = dashed ? 'transparent' : color; if (dashed) b.style.border = '2px dashed ' + color;
+    s.append(b, document.createTextNode(name)); el.appendChild(s);
+  });
+}
+function yAxisLeft(svg, y, ticks, f, w) {
+  const g = svg.append('g').call(d3.axisLeft(y).ticks(ticks).tickFormat(f).tickSize(-w));
+  styleAxis(g); g.select('.domain').remove();
+  const widths = []; g.selectAll('text').each(function () { widths.push(this.getComputedTextLength()); });
+  return [g, d3.max(widths) || 0];
+}
+
+// ---------- metric marks
+function fillMarks() {
+  root.querySelectorAll('[data-source][data-where]:not(table *)').forEach(el => {
+    const d = dash.data(el.dataset.source);
+    if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const conds = el.dataset.where.split('&').map(p => p.split('=').map(decodeURIComponent));
+    const row = d.data.find(r => conds.every(([k, v]) => String(r[k]) === v));
+    el.classList.remove('dash-skeleton');
+    el.textContent = row ? fmt(row[el.dataset.field], el.dataset.fmt) : '—';
+  });
+}
+function spread(items, gap, lo, hi) {
+  const a = items.slice().sort((p, q) => p.y - q.y);
+  for (let i = 1; i < a.length; i++) if (a[i].y - a[i - 1].y < gap) a[i].y = a[i - 1].y + gap;
+  if (a.length && a[a.length - 1].y > hi) { const sh = a[a.length - 1].y - hi; a.forEach(p => p.y -= sh); }
+  for (let i = a.length - 2; i >= 0; i--) if (a[i + 1].y - a[i].y < gap) a[i].y = a[i + 1].y - gap;
+  return items;
+}
+function labelWidth(svg, texts) {
+  const g = svg.append('g'); let w = 0;
+  texts.forEach(t => { const n = g.append('text').style('font-size', 'var(--cds-font-size-caption)').text(t).node(); w = Math.max(w, n.getComputedTextLength()); });
+  g.remove(); return w;
+}
+function drawP5() {
+  const el = document.getElementById('ch-p5'); if (fail(el, ['projection5']) || !ok('projection5')) return;
+  const rows = dash.data('projection5').data;
+  const H = 260; const [svg, W] = svgFor(el, H);
+  const vals = rows.flatMap(r => [r.actual, r.low, r.central, r.high]).filter(v => v != null);
+  const y = d3.scaleLinear([Math.floor(d3.min(vals) * 0.9 / 500) * 500, d3.max(vals) * 1.05], [H - 26, 12]);
+  const [, lw] = yAxisLeft(svg, y, 5, d3.format(','), 0); svg.selectAll('g').remove();
+  const l = lw + 10, r = 56;
+  yAxisLeft(svg.append('g').attr('transform', `translate(${l},0)`), y, 5, d3.format(','), W - l - r);
+  const x = d3.scalePoint(rows.map(d => d.year), [l + 10, W - r]);
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 26})`).call(d3.axisBottom(x).tickSizeOuter(0).tickFormat(d => (W < 480 && d % 2) ? '' : String(d))); styleAxis(gx);
+  const proj = rows.filter(d => d.central != null);
+  svg.append('path').datum(proj).attr('fill', BRAND[0]).attr('fill-opacity', 0.1)
+    .attr('d', d3.area().x(d => x(d.year)).y0(d => y(d.low)).y1(d => y(d.high)));
+  const act = rows.filter(d => d.actual != null);
+  const link = act.length ? [act[act.length - 1], proj[0]] : [];
+  svg.append('path').datum(act).attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', d3.line().x(d => x(d.year)).y(d => y(d.actual)));
+  if (link.length === 2) svg.append('line').attr('x1', x(link[0].year)).attr('y1', y(link[0].actual)).attr('x2', x(link[1].year)).attr('y2', y(link[1].central)).attr('stroke', 'var(--color-fg)').attr('stroke-width', 2).attr('stroke-dasharray', '2 4');
+  const S = [['low', 'Low', 'var(--cds-chart-muted)'], ['central', 'Central', BRAND[0]], ['high', 'High', 'var(--cds-chart-muted)']];
+  const last = proj[proj.length - 1];
+  const ends = S.map(([k]) => ({ k, y: y(last[k]) + 4 }));
+  spread(ends, 13, 12, H - 30);
+  S.forEach(([k, name, c], i) => {
+    svg.append('path').datum(proj).attr('fill', 'none').attr('stroke', c).attr('stroke-width', 2).attr('stroke-dasharray', k === 'central' ? null : '5 4').attr('d', d3.line().x(d => x(d.year)).y(d => y(d[k])));
+    svg.append('text').attr('x', x(last.year) + 6).attr('y', ends[i].y).attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtInt(last[k]));
+  });
+  svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', d => x(d.year)).attr('cy', d => y(d.actual != null ? d.actual : d.central)).attr('r', 3.5)
+    .attr('fill', d => d.actual != null ? 'var(--color-fg)' : BRAND[0])
+    .on('mousemove', (ev, d) => tipShow(ev, d.actual != null ? [['t', String(d.year)], [null, 'Actual: ' + fmtInt(d.actual)]] : [['t', d.year + (d.year === 2026 ? ' (year-end projection)' : ' (projected)')], [null, 'Low: ' + fmtInt(d.low)], [null, 'Central: ' + fmtInt(d.central)], [null, 'High: ' + fmtInt(d.high)]]))
+    .on('mouseleave', tipHide);
+  legend('lg-p5', [['Actual', 'var(--color-fg)'], ['Central', BRAND[0]], ['Low and high', 'var(--cds-chart-muted)', true]]);
+}
+function drawP901() {
+  const el = document.getElementById('ch-p901'); if (fail(el, ['proj901']) || !ok('proj901')) return;
+  const rows = dash.data('proj901').data;
+  const H = 240; const [svg, W] = svgFor(el, H);
+  const v = rows.flatMap(r => [r.actual_share_pct, r.low_share_pct, r.high_share_pct]).filter(x => x != null);
+  const y = d3.scaleLinear([Math.floor(d3.min(v) - 2), Math.ceil(d3.max(v) + 1)], [H - 26, 12]);
+  const pf = d => d + '%';
+  const [, lw] = yAxisLeft(svg, y, 5, pf, 0); svg.selectAll('g').remove();
+  const l = lw + 10, r = 48;
+  yAxisLeft(svg.append('g').attr('transform', `translate(${l},0)`), y, 5, pf, W - l - r);
+  const x = d3.scalePoint(rows.map(d => d.year), [l + 12, W - r]);
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 26})`).call(d3.axisBottom(x).tickSizeOuter(0)); styleAxis(gx);
+  const act = rows.filter(d => d.actual_share_pct != null), proj = rows.filter(d => d.central_share_pct != null);
+  svg.append('path').datum(proj).attr('fill', BRAND[0]).attr('fill-opacity', 0.1).attr('d', d3.area().x(d => x(d.year)).y0(d => y(d.low_share_pct)).y1(d => y(d.high_share_pct)));
+  svg.append('path').datum(act).attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('d', d3.line().x(d => x(d.year)).y(d => y(d.actual_share_pct)));
+  if (act.length && proj.length) svg.append('line').attr('x1', x(act[act.length - 1].year)).attr('y1', y(act[act.length - 1].actual_share_pct)).attr('x2', x(proj[0].year)).attr('y2', y(proj[0].central_share_pct)).attr('stroke', 'var(--color-fg)').attr('stroke-width', 2).attr('stroke-dasharray', '2 4');
+  svg.append('path').datum(proj).attr('fill', 'none').attr('stroke', BRAND[0]).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('d', d3.line().x(d => x(d.year)).y(d => y(d.central_share_pct)));
+  svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', d => x(d.year)).attr('cy', d => y(d.actual_share_pct != null ? d.actual_share_pct : d.central_share_pct)).attr('r', 3.5)
+    .attr('fill', d => d.actual_share_pct != null ? 'var(--color-fg)' : BRAND[0])
+    .on('mousemove', (ev, d) => tipShow(ev, d.actual_share_pct != null ? [['t', d.year + ', actual'], [null, fmtInt(d.actual_h) + ' hours (' + d.actual_share_pct.toFixed(1) + '% of the year)']] : [['t', d.year + ', projected'], [null, 'Central: ' + fmtInt(d.central_h) + ' h (' + d.central_share_pct.toFixed(1) + '%)'], [null, 'Range: ' + fmtInt(d.low_h) + '–' + fmtInt(d.high_h) + ' h']]))
+    .on('mouseleave', tipHide);
+  const last = proj[proj.length - 1];
+  svg.append('text').attr('x', x(last.year) + 6).attr('y', y(last.central_share_pct) + 4).attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(last.central_share_pct.toFixed(1) + '%');
+  legend('lg-p901', [['Actual', 'var(--color-fg)'], ['Central projection', BRAND[0]], ['Low–high range', BRAND[0], true]]);
+}
+function drawCityTown() {
+  const ids = [['ch-ct-trav', 'travel_p50', 'travel_p90']];
+  const cols = [BRAND[0], BRAND[1]];
+  ids.forEach(([id, p50, p90]) => {
+    const el = document.getElementById(id); if (fail(el, ['city_town']) || !ok('city_town')) return;
+    const rows = dash.data('city_town').data;
+    groupedBar(el, ['Median', '90% within'], rows.map(r => ({ label: r.area, r })), (c, s) => s.r[c === 'Median' ? p50 : p90], { colors: cols, yFmt: mmss, tipFmt: mmss, h: 200 });
+  });
+  if (ok('city_town')) legend('lg-citytown', dash.data('city_town').data.map((r, i) => [r.area + ' (' + fmtInt(r.measured) + ' measured)', cols[i]]));
+}
+function drawAreaTypes() {
+  const el = document.getElementById('ch-areatypes'); if (fail(el, ['area_types']) || !ok('area_types')) return;
+  const rows = dash.data('area_types').data.filter(r => r.area !== 'Outside / no zone');
+  const areas = [...new Set(rows.map(r => r.area))];
+  const H = areas.length * 44 + 32; const [svg, W] = svgFor(el, H);
+  const labs = areas.map(a => a + ' (' + fmtInt(rows.find(r => r.area === a).area_total) + ')');
+  const tmp = svg.append('g'); let lw = 0; labs.forEach(t => { const n = tmp.append('text').style('font-size', 'var(--cds-font-size-caption)').text(t).node(); lw = Math.max(lw, n.getComputedTextLength()); }); tmp.remove();
+  const l = lw + 12;
+  const y = d3.scaleBand(areas, [4, H - 28]).padding(0.25);
+  const x = d3.scaleLinear([0, 1], [l, W - 18]);
+  areas.forEach((a, i) => {
+    let acc = 0; const rs = rows.filter(r => r.area === a); const tot = rs[0].area_total;
+    svg.append('text').attr('x', l - 8).attr('y', y(a) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(labs[i]);
+    GROUPS.forEach(g => {
+      const r = rs.find(q => q.group === g); if (!r || !r.incidents) return;
+      const w = r.incidents / tot;
+      svg.append('rect').attr('x', x(acc)).attr('width', Math.max(0, x(acc + w) - x(acc) - 1)).attr('y', y(a)).attr('height', y.bandwidth()).attr('fill', gcolor(g))
+        .on('mousemove', ev => tipShow(ev, [['t', a], [null, g + ': ' + fmtInt(r.incidents) + ' (' + r.share_pct.toFixed(1) + '%)']])).on('mouseleave', tipHide);
+      if (x(acc + w) - x(acc) > 40) svg.append('text').attr('x', x(acc) + 5).attr('y', y(a) + y.bandwidth() / 2 + 4).attr('fill', 'var(--color-bg)').style('font-size', 'var(--cds-font-size-caption)').style('pointer-events', 'none').text(Math.round(100 * w) + '%');
+      acc += w;
+    });
+  });
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 28})`).call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('.0%')).tickSizeOuter(0)); styleAxis(gx);
+  legend('lg-areatypes', GROUPS.map(g => [g, gcolor(g)]));
+}
+function drawUnitAreas() {
+  const el = document.getElementById('ch-unitareas'); if (fail(el, ['unit_area_mix']) || !ok('unit_area_mix')) return;
+  const rows = dash.data('unit_area_mix').data;
+  const units = [...new Set(rows.map(r => r.unit))];
+  const areas = ['901 area', '902 area', '903 area', '904 area', 'No response zone'];
+  const ac = { '901 area': BRAND[0], '902 area': BRAND[1], '903 area': BRAND[2], '904 area': BRAND[3], 'No response zone': 'var(--cds-chart-muted)' };
+  const H = units.length * 36 + 32; const [svg, W] = svgFor(el, H);
+  const l = labelWidth(svg, units) + 14;
+  const y = d3.scaleBand(units, [4, H - 28]).padding(0.25);
+  const x = d3.scaleLinear([0, 1], [l, W - 18]);
+  units.forEach(un => {
+    const rs = rows.filter(r => r.unit === un); const tot = d3.sum(rs, r => r.incidents); let acc = 0;
+    svg.append('text').attr('x', l - 8).attr('y', y(un) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(un);
+    areas.forEach(a => {
+      const r = rs.find(q => q.area === a); if (!r || !r.incidents) return;
+      const w = r.incidents / tot;
+      const own = r.home === a;
+      svg.append('rect').attr('x', x(acc)).attr('width', Math.max(0, x(acc + w) - x(acc) - 1)).attr('y', y(un)).attr('height', y.bandwidth()).attr('fill', ac[a])
+        .attr('stroke', own ? 'var(--color-fg)' : null).attr('stroke-width', own ? 1.5 : null)
+        .on('mousemove', ev => tipShow(ev, [['t', un], [null, a + ': ' + fmtInt(r.incidents) + ' (' + r.share_pct.toFixed(1) + '%)']])).on('mouseleave', tipHide);
+      if (x(acc + w) - x(acc) > 34) svg.append('text').attr('x', x(acc) + 5).attr('y', y(un) + y.bandwidth() / 2 + 4).attr('fill', 'var(--color-bg)').style('font-size', 'var(--cds-font-size-caption)').style('pointer-events', 'none').text(Math.round(100 * w) + '%');
+      acc += w;
+    });
+  });
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 28})`).call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('.0%')).tickSizeOuter(0)); styleAxis(gx);
+  legend('lg-unitareas', areas.map(a => [a, ac[a]]).concat([['Outlined: the unit\'s home area', 'var(--color-fg)', true]]));
+}
+function drawCommitted() {
+  const el = document.getElementById('ch-commit'); if (fail(el, ['committed_years']) || !ok('committed_years')) return;
+  const rows = dash.data('committed_years').data;
+  const parts = [['recorded_h', 'Recorded', BRAND[0]], ['turnout_fill_h', 'Turnout fill-in (estimated)', 'var(--cds-chart-muted)'], ['return_h', 'Return (estimated)', BRAND[1]], ['return_canceled_h', 'Return, canceled en route (estimated)', BRAND[2]]];
+  const H = 220; const [svg, W] = svgFor(el, H);
+  const y = d3.scaleLinear([0, d3.max(rows, r => r.total_h) * 1.15], [H - 26, 16]);
+  const [, lw] = yAxisLeft(svg, y, 4, d3.format(','), 0); svg.selectAll('g').remove();
+  const l = lw + 10;
+  yAxisLeft(svg.append('g').attr('transform', `translate(${l},0)`), y, 4, d3.format(','), W - l - 8);
+  const x = d3.scaleBand(rows.map(r => String(r.year)), [l, W - 8]).padding(0.35);
+  const bw = Math.min(48, x.bandwidth()); const off = (x.bandwidth() - bw) / 2;
+  rows.forEach(r => {
+    let acc = 0;
+    parts.forEach(([f, name, c]) => {
+      const v = r[f];
+      svg.append('rect').attr('x', x(String(r.year)) + off).attr('width', bw).attr('y', y(acc + v)).attr('height', Math.max(0, y(acc) - y(acc + v) - 1)).attr('fill', c)
+        .on('mousemove', ev => tipShow(ev, [['t', r.year + ', Jan 1 – Oct 17'], [null, name + ': ' + fmtInt(v) + ' h'], [null, 'Total: ' + fmtInt(r.total_h) + ' h (' + r.min_per_response.toFixed(1) + ' min per response)']])).on('mouseleave', tipHide);
+      acc += v;
+    });
+    svg.append('text').attr('x', x(String(r.year)) + x.bandwidth() / 2).attr('y', y(acc) - 4).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtInt(r.total_h));
+  });
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 26})`).call(d3.axisBottom(x).tickSizeOuter(0)); styleAxis(gx);
+  legend('lg-commit', parts.map(([, n, c]) => [n, c]));
+}
+
+// ---------- tables
+function fillTable(tbl) {
+  const id = tbl.dataset.source; const d = dash.data(id);
+  const tb = tbl.tBodies[0] || tbl.createTBody();
+  tb.replaceChildren();
+  const ths = [...tbl.tHead.rows[0].cells];
+  if (d.status !== 'ok') {
+    if (d.status === 'error' || d.status === 'connect') { const tr = tb.insertRow(); const td = tr.insertCell(); td.colSpan = ths.length; const f = document.createElement('div'); f.className = 'ifd-fail'; f.textContent = 'Failed to load'; td.appendChild(f); }
+    return;
+  }
+  let rows = d.data.slice();
+  if (tbl.dataset.filter) { const [k, v] = tbl.dataset.filter.split('='); rows = rows.filter(r => String(r[k]) === v); }
+  if (tbl.dataset.sortField) {
+    const f = tbl.dataset.sortField, dir = tbl.dataset.sortDir === 'asc' ? 1 : -1;
+    rows.sort((a, b) => { const x = a[f], y = b[f]; return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x).localeCompare(String(y))) * dir; });
+  }
+  const keys = tbl.dataset.rowKey.split(',');
+  rows.forEach(r => {
+    const tr = tb.insertRow();
+    tr.dataset.key = keys.length > 1 ? keys.map(k => encodeURIComponent(r[k])).join(',') : String(r[keys[0]]);
+    ths.forEach(th => {
+      const td = tr.insertCell(); const f = th.dataset.field; const v = r[f];
+      if (th.dataset.area && r.home === th.dataset.area) td.classList.add('own');
+      if (th.classList.contains('num')) td.className = 'num';
+      if (th.dataset.bar && v != null) {
+        const wrap = document.createElement('div'); wrap.className = 'ifd-cellbar';
+        const t = document.createElement('span'); t.textContent = fmt(v, th.dataset.fmt);
+        const bar = document.createElement('i'); bar.style.width = Math.max(1, Math.min(100, 100 * v / +th.dataset.bar)) * 0.6 + 'px';
+        if (th.dataset.hi === 'lt60' && v < 60) bar.className = 'hi';
+        wrap.append(t, bar); td.appendChild(wrap);
+      } else {
+        const txt = keys.length === 1 && f === keys[0] && !th.dataset.fmt ? String(v) : fmt(v, (r.row_fmt && th.dataset.fmt) ? r.row_fmt : th.dataset.fmt);
+        if (td.classList.contains('own')) { const b = document.createElement('b'); b.textContent = txt; td.appendChild(b); td.style.fontWeight = '700'; }
+        else td.textContent = txt;
+      }
+    });
+  });
+}
+root.querySelectorAll('table[data-sortable]').forEach(tbl => {
+  [...tbl.tHead.rows[0].cells].forEach(th => {
+    th.classList.add('sort');
+    th.addEventListener('click', () => {
+      const same = tbl.dataset.sortField === th.dataset.field;
+      tbl.dataset.sortField = th.dataset.field;
+      tbl.dataset.sortDir = same && tbl.dataset.sortDir === 'desc' ? 'asc' : 'desc';
+      [...tbl.tHead.rows[0].cells].forEach(h => h.removeAttribute('aria-sort'));
+      th.setAttribute('aria-sort', tbl.dataset.sortDir === 'asc' ? 'ascending' : 'descending');
+      fillTable(tbl);
+    });
+  });
+});
+
+// ---------- charts
+function barChart(el, rows, o) {
+  const H = o.h || 220;
+  const [svg, W] = svgFor(el, H);
+  const m = { t: 18, r: 8, b: 26, l: 0 };
+  const y = d3.scaleLinear([0, (o.yMax || d3.max(rows, o.y)) * 1.12], [H - m.b, m.t]);
+  const [, lw] = yAxisLeft(svg, y, 4, o.yFmt || d3.format(','), 0);
+  svg.selectAll('g').remove();
+  m.l = lw + 10;
+  const [ga] = yAxisLeft(svg.append('g').attr('transform', `translate(${m.l},0)`), y, 4, o.yFmt || d3.format(','), W - m.l - m.r);
+  const x = d3.scaleBand(rows.map(o.x), [m.l, W - m.r]).padding(0.25);
+  if (o.shade) o.shade(svg, x, y, H, m);
+  const bw = Math.min(32, x.bandwidth());
+  const off = (x.bandwidth() - bw) / 2;
+  svg.append('g').selectAll('rect').data(rows).join('rect')
+    .attr('x', d => x(o.x(d)) + off).attr('width', bw)
+    .attr('y', d => y(o.y(d))).attr('height', d => y(0) - y(o.y(d))).attr('rx', 4)
+    .attr('fill', d => o.color ? o.color(d) : BRAND[0])
+    .on('mousemove', (ev, d) => tipShow(ev, o.tip(d))).on('mouseleave', tipHide);
+  if (o.labels) svg.append('g').selectAll('text').data(rows).join('text')
+    .attr('x', d => x(o.x(d)) + x.bandwidth() / 2).attr('y', d => y(o.y(d)) - 4).attr('text-anchor', 'middle')
+    .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(o.labels);
+  if (o.ref != null) svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(o.ref)).attr('y2', y(o.ref)).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+  const step = Math.ceil(rows.length / Math.max(1, Math.floor((W - m.l) / 34)));
+  const gx = svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickSizeOuter(0).tickFormat((d, i) => i % step ? '' : (o.xFmt ? o.xFmt(d) : d)));
+  styleAxis(gx);
+  return { svg, x, y, off, bw };
+}
+function groupedBar(el, cats, series, val, o) {
+  const H = o.h || 220;
+  const [svg, W] = svgFor(el, H);
+  const max = d3.max(cats, c => d3.max(series, s => val(c, s)));
+  const y = d3.scaleLinear([0, max * 1.15], [H - 26, 16]);
+  const [, lw] = yAxisLeft(svg, y, 4, o.yFmt, 0); svg.selectAll('g').remove();
+  const l = lw + 10;
+  yAxisLeft(svg.append('g').attr('transform', `translate(${l},0)`), y, 4, o.yFmt, W - l - 8);
+  const x0 = d3.scaleBand(cats, [l, W - 8]).padding(0.25);
+  const x1 = d3.scaleBand(series.map((s, i) => i), [0, x0.bandwidth()]).padding(0.12);
+  const bw = Math.min(32, x1.bandwidth());
+  cats.forEach(c => series.forEach((s, i) => {
+    const v = val(c, s);
+    const xx = x0(c) + x1(i) + (x1.bandwidth() - bw) / 2;
+    svg.append('rect').attr('x', xx).attr('width', bw).attr('y', y(v)).attr('height', y(0) - y(v)).attr('rx', 4).attr('fill', o.colors[i])
+      .on('mousemove', ev => tipShow(ev, [['t', c], [null, s.label + ': ' + o.tipFmt(v)]])).on('mouseleave', tipHide);
+    svg.append('text').attr('x', xx + bw / 2).attr('y', y(v) - 4).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(o.tipFmt(v));
+  }));
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 26})`).call(d3.axisBottom(x0).tickSizeOuter(0));
+  styleAxis(gx);
+}
+
+function drawWindow() {
+  const el = document.getElementById('ch-window'); if (fail(el, ['annual']) || !ok('annual')) return;
+  const rows = dash.data('annual').data;
+  const c = barChart(el, rows, { x: d => String(d.year), y: d => d.total,
+    color: d => d.projected ? 'none' : 'var(--cds-chart-muted)',
+    labels: d => fmtInt(d.total) + (d.projected ? '*' : ''),
+    tip: d => [['t', d.year + (d.projected ? ' (projected)' : ', full year')], [null, fmtInt(d.total) + ' incidents'], [null, d.total_change_pct == null ? 'First year shown' : fmt(d.total_change_pct, 'spct') + ' vs prior year']] });
+  const P = rows.find(d => d.projected);
+  if (P) {
+    d3.select(el).selectAll('svg > g > rect').filter(d => d && d.projected)
+      .attr('fill', 'none').attr('stroke', BRAND[0]).attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
+    const bx = c.x(String(P.year)) + c.off;
+    c.svg.append('rect').attr('x', bx).attr('width', c.bw).attr('y', c.y(P.same_window)).attr('height', c.y(0) - c.y(P.same_window)).attr('rx', 4)
+      .attr('fill', BRAND[0])
+      .on('mousemove', ev => tipShow(ev, [['t', P.year + ', actual to date'], [null, fmtInt(P.same_window) + ' incidents, Jan 1 – Oct 17'], [null, fmtInt(P.total - P.same_window) + ' more projected by Dec 31']])).on('mouseleave', tipHide);
+  }
+}
+function drawMonthly() {
+  const el = document.getElementById('ch-monthly'); if (fail(el, ['monthly']) || !ok('monthly')) return;
+  const rows = dash.data('monthly').data;
+  const years = [...new Set(rows.map(r => r.year))].sort();
+  const H = 230; const [svg, W] = svgFor(el, H);
+  const y = d3.scaleLinear([0, d3.max(rows, r => r.incidents) * 1.1], [H - 26, 12]);
+  const [, lw] = yAxisLeft(svg, y, 4, d3.format(','), 0); svg.selectAll('g').remove();
+  const l = lw + 10, r = 44;
+  yAxisLeft(svg.append('g').attr('transform', `translate(${l},0)`), y, 4, d3.format(','), W - l - r);
+  const x = d3.scalePoint(d3.range(1, 13), [l + 8, W - r]);
+  const mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 26})`).call(d3.axisBottom(x).tickSizeOuter(0).tickFormat((d, i) => (W < 480 && i % 2) ? '' : mn[d - 1])); styleAxis(gx);
+  const endLabels = [];
+  const cols = years.map((yr, i) => yr === 2026 ? BRAND[0] : (yr === 2025 ? BRAND[1] : 'var(--cds-chart-muted)'));
+  years.forEach((yr, i) => {
+    const pts = rows.filter(r => r.year === yr).sort((a, b) => a.month - b.month);
+    const full = pts.filter(p => !p.partial);
+    svg.append('path').datum(full).attr('fill', 'none').attr('stroke', cols[i]).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+      .attr('d', d3.line().x(p => x(p.month)).y(p => y(p.incidents)));
+    svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', p => x(p.month)).attr('cy', p => y(p.incidents)).attr('r', p => p.partial ? 4 : 2.5)
+      .attr('fill', p => p.partial ? 'var(--color-panel)' : cols[i]).attr('stroke', cols[i]).attr('stroke-width', 1.5)
+      .on('mousemove', (ev, p) => tipShow(ev, [['t', mn[p.month - 1] + ' ' + yr + (p.partial ? ' (1st – 21st)' : '')], [null, fmtInt(p.incidents) + ' incidents']])).on('mouseleave', tipHide);
+    const last = full[full.length - 1];
+    if (last) endLabels.push({ x: x(last.month) + 6, y: y(last.incidents) + 4, c: cols[i], t: String(yr) });
+  });
+  [...d3.group(endLabels, e => Math.round(e.x)).values()].forEach(g => spread(g, 13, 12, H - 30));
+  endLabels.forEach(e => svg.append('text').attr('x', e.x).attr('y', e.y).attr('fill', e.c).style('font-size', 'var(--cds-font-size-caption)').text(e.t));
+  legend('lg-monthly', years.map((yr, i) => [String(yr), cols[i]]));
+}
+function drawFD() {
+  const el = document.getElementById('ch-fd'); if (fail(el, ['first_due']) || !ok('first_due')) return;
+  const rows = dash.data('first_due').data;
+  const series = rows.map(r => ({ label: r.condition, r }));
+  groupedBar(el, ['50% of calls within', '90% of calls within'], series,
+    (c, s) => c.startsWith('50') ? s.r.p50_s : s.r.p90_s,
+    { colors: ['var(--cds-chart-muted)', 'var(--cds-chart-status-critical)'], yFmt: mmss, tipFmt: mmss });
+  legend('lg-fd', rows.map((r, i) => [r.condition, i ? 'var(--cds-chart-status-critical)' : 'var(--cds-chart-muted)']));
+}
+function drawConcR() {
+  const el = document.getElementById('ch-concr'); if (fail(el, ['conc_resp']) || !ok('conc_resp')) return;
+  const rows = dash.data('conc_resp').data;
+  const cols = ['var(--cds-chart-muted)', BRAND[0], 'var(--cds-chart-status-critical)'];
+  groupedBar(el, ['50% of calls within', '90% of calls within'], rows.map(r => ({ label: r.condition, r })),
+    (c, s) => c.startsWith('50') ? s.r.p50_s : s.r.p90_s, { colors: cols, yFmt: mmss, tipFmt: mmss });
+  legend('lg-concr', rows.map((r, i) => [r.condition + ' (' + fmtInt(r.measured) + ')', cols[i]]));
+}
+function drawMix() {
+  const el = document.getElementById('ch-mix'); if (fail(el, ['unit_mix']) || !ok('unit_mix')) return;
+  const rows = dash.data('unit_mix').data;
+  const pos = [...new Set(rows.map(r => r.position))];
+  const H = pos.length * 34 + 30; const [svg, W] = svgFor(el, H);
+  const l = labelWidth(svg, pos) + 14;
+  const y = d3.scaleBand(pos, [4, H - 26]).padding(0.25);
+  const x = d3.scaleLinear([0, 1], [l, W - 18]);
+  pos.forEach(p => {
+    const rs = rows.filter(r => r.position === p); const tot = d3.sum(rs, r => r.incidents); let acc = 0;
+    svg.append('text').attr('x', l - 8).attr('y', y(p) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(p);
+    GROUPS.forEach(g => {
+      const r = rs.find(q => q.group === g); if (!r || !r.incidents) return;
+      const w = r.incidents / tot;
+      svg.append('rect').attr('x', x(acc)).attr('width', Math.max(0, x(acc + w) - x(acc) - 1)).attr('y', y(p)).attr('height', y.bandwidth()).attr('fill', gcolor(g))
+        .on('mousemove', ev => tipShow(ev, [['t', p], [null, g + ': ' + fmtInt(r.incidents) + ' (' + (100 * w).toFixed(1) + '%)']])).on('mouseleave', tipHide);
+      acc += w;
+    });
+  });
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 26})`).call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('.0%')).tickSizeOuter(0)); styleAxis(gx);
+  legend('lg-mix', GROUPS.map(g => [g, gcolor(g)]));
+}
+function drawHourly() {
+  const el = document.getElementById('ch-hourly'); if (fail(el, ['hourly', 'metrics']) || !ok('hourly') || !ok('metrics')) return;
+  const rows = dash.data('hourly').data;
+  const start = (dash.data('metrics').data.find(r => r.metric === 'peak12_start') || {}).value;
+  const inWin = (h) => start != null && ((h - start + 24) % 24) < 12;
+  barChart(el, rows, { x: d => String(d.hour), y: d => d.incidents,
+    color: d => inWin(d.hour) ? BRAND[0] : 'var(--cds-chart-muted)',
+    xFmt: d => (+d % 3 ? '' : String(d).padStart(2, '0')),
+    tip: d => [['t', String(d.hour).padStart(2, '0') + ':00 – ' + String(d.hour).padStart(2, '0') + ':59'], [null, fmtInt(d.incidents) + ' incidents']] });
+}
+function drawHeat() {
+  const el = document.getElementById('ch-heat'); if (fail(el, ['hour_dow']) || !ok('hour_dow')) return;
+  const rows = dash.data('hour_dow').data;
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const H = 7 * 24 + 30; const [svg, W] = svgFor(el, H);
+  const l = 34;
+  const x = d3.scaleBand(d3.range(24), [l, W - 4]).padding(0.08);
+  const y = d3.scaleBand(days, [4, H - 24]).padding(0.08);
+  const cs = getComputedStyle(root);
+  const c0 = cs.getPropertyValue('--color-panel').trim() || '#fff';
+  const c1 = d3.select(el).append('span').style('color', BRAND[0]).node(); const col1 = getComputedStyle(c1).color; c1.remove();
+  const col = d3.scaleLinear([0, d3.max(rows, r => r.incidents)], [0, 1]);
+  const interp = d3.interpolateRgb(c0, col1);
+  svg.append('g').selectAll('rect').data(rows).join('rect').attr('x', d => x(d.hour)).attr('y', d => y(d.day)).attr('width', x.bandwidth()).attr('height', y.bandwidth()).attr('rx', 2)
+    .attr('fill', d => interp(0.08 + 0.92 * col(d.incidents)))
+    .on('mousemove', (ev, d) => tipShow(ev, [['t', d.day + ' ' + String(d.hour).padStart(2, '0') + ':00'], [null, fmtInt(d.incidents) + ' incidents']])).on('mouseleave', tipHide);
+  days.forEach(d => svg.append('text').attr('x', l - 6).attr('y', y(d) + y.bandwidth() / 2 + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(d));
+  const gx = svg.append('g').attr('transform', `translate(0,${H - 22})`).call(d3.axisBottom(x).tickSize(0).tickFormat(d => d % 3 ? '' : String(d).padStart(2, '0'))); styleAxis(gx); gx.select('.domain').remove();
+}
+function drawConcT() {
+  const el = document.getElementById('ch-conct'); if (fail(el, ['conc_trend']) || !ok('conc_trend')) return;
+  const rows = dash.data('conc_trend').data;
+  const c = barChart(el, rows, { h: 190, x: d => String(d.year), y: d => d.overlapping_full,
+    color: d => d.projected ? 'none' : 'var(--cds-chart-muted)', labels: d => fmtInt(d.overlapping_full) + (d.projected ? '*' : ''),
+    tip: d => [['t', d.year + (d.projected ? ' (projected)' : ', full year')], [null, fmtInt(d.overlapping_full) + ' incidents began during another'], [null, d.share_full_pct != null ? d.share_full_pct.toFixed(1) + '% of incidents' : 'Projected from ' + fmtInt(d.overlapping_window) + ' to date']] });
+  const P = rows.find(d => d.projected);
+  if (P) {
+    d3.select(el).selectAll('svg > g > rect').filter(d => d && d.projected).attr('fill', 'none').attr('stroke', BRAND[0]).attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
+    c.svg.append('rect').attr('x', c.x(String(P.year)) + c.off).attr('width', c.bw).attr('y', c.y(P.overlapping_window)).attr('height', c.y(0) - c.y(P.overlapping_window)).attr('rx', 4).attr('fill', BRAND[0])
+      .on('mousemove', ev => tipShow(ev, [['t', P.year + ', actual to date'], [null, fmtInt(P.overlapping_window) + ' through Oct 17'], [null, fmtInt(P.overlapping_full - P.overlapping_window) + ' more projected by Dec 31']])).on('mouseleave', tipHide);
+  }
+}
+function drawSF() {
+  const el = document.getElementById('ch-sf'); if (fail(el, ['sf_personnel']) || !ok('sf_personnel')) return;
+  const raw = dash.data('sf_personnel').data;
+  const maxP = Math.max(16, d3.max(raw, r => r.personnel));
+  const rows = d3.range(1, maxP + 1).map(p => ({ personnel: p, incidents: (raw.find(r => r.personnel === p) || {}).incidents || 0 }));
+  barChart(el, rows, { h: 200, x: d => String(d.personnel), y: d => d.incidents,
+    color: d => d.personnel <= 11 ? 'var(--cds-chart-status-critical)' : 'var(--cds-chart-muted)',
+    xFmt: d => (+d % 2 ? d : ''),
+    shade: (svg, x, y, H, m) => { const cx = x('15') + x.bandwidth() / 2; svg.append('line').attr('x1', cx).attr('x2', cx).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3'); svg.append('text').attr('x', cx - 4).attr('y', m.t + 8).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text('15'); },
+    tip: d => [['t', d.personnel + ' personnel'], [null, fmtInt(d.incidents) + ' structure fires']] });
+}
+function drawNfirs() {
+  const el = document.getElementById('sm-nfirs'); if (fail(el, ['nfirs']) || !ok('nfirs')) return;
+  const rows = dash.data('nfirs').data;
+  const series = [...new Set(rows.map(r => r.series))];
+  series.forEach(s => {
+    const box = document.createElement('div'); const h = document.createElement('h5'); h.textContent = s;
+    const c = document.createElement('div'); c.className = 'ifd-chart'; box.append(h, c); el.appendChild(box);
+    const pts = rows.filter(r => r.series === s).sort((a, b) => a.year - b.year);
+    const H = 140; const [svg, W] = svgFor(c, H);
+    const y = d3.scaleLinear([0, d3.max(pts, p => p.incidents) * 1.2], [H - 22, 14]);
+    const x = d3.scalePoint(pts.map(p => p.year), [26, W - 26]);
+    const gx = svg.append('g').attr('transform', `translate(0,${H - 22})`).call(d3.axisBottom(x).tickSizeOuter(0).tickFormat(d => "'" + String(d).slice(2))); styleAxis(gx);
+    const up = pts[pts.length - 1].incidents >= pts[0].incidents;
+    const col = up ? BRAND[0] : 'var(--cds-chart-muted)';
+    svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', col).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', d3.line().x(p => x(p.year)).y(p => y(p.incidents)));
+    svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', p => x(p.year)).attr('cy', p => y(p.incidents)).attr('r', 3).attr('fill', col)
+      .on('mousemove', (ev, p) => tipShow(ev, [['t', s + ', ' + p.year], [null, fmtInt(p.incidents) + ' incidents (Jan 1 – Nov 12)']])).on('mouseleave', tipHide);
+    [pts[0], pts[pts.length - 1]].forEach((p, i) => svg.append('text').attr('x', x(p.year)).attr('y', y(p.incidents) - 7).attr('text-anchor', i ? 'end' : 'start').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtInt(p.incidents)));
+  });
+}
+function drawDQM() {
+  const el = document.getElementById('ch-dqm'); if (fail(el, ['dq_month']) || !ok('dq_month')) return;
+  const mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  barChart(el, dash.data('dq_month').data, { h: 190, x: d => mn[d.month - 1], y: d => d.rate_pct, yFmt: d => d + '%',
+    color: () => 'var(--cds-chart-muted)', labels: d => d.rate_pct.toFixed(1),
+    tip: d => [['t', mn[d.month - 1] + ' 2026'], [null, fmtInt(d.tier1) + ' of ' + fmtInt(d.arrived_records) + ' records (' + d.rate_pct.toFixed(2) + '%)']] });
+}
+function drawDQ1() {
+  const el = document.getElementById('ch-dq1'); if (fail(el, ['dq_onscene1']) || !ok('dq_onscene1')) return;
+  barChart(el, dash.data('dq_onscene1').data, { h: 190, x: d => d.position, y: d => d.records,
+    color: d => (d.position === '931/932' || d.position === '963/964/965') ? BRAND[0] : 'var(--cds-chart-muted)', labels: d => fmtInt(d.records),
+    tip: d => [['t', d.position], [null, fmtInt(d.records) + ' records on scene exactly 1 s']] });
+}
+
+const DRAW = {
+  demand: [drawWindow, drawMonthly, drawP5, drawCommitted, drawP901], response: [drawFD, drawCityTown], workload: [drawMix, drawUnitAreas],
+  time: [drawHourly, drawHeat, drawConcT, drawConcR], types: [drawSF, drawNfirs], 
+};
+function draw() {
+  fillMarks();
+  root.querySelectorAll('table[data-source]').forEach(fillTable);
+  (DRAW[active] || []).forEach(fn => { try { fn(); } catch (e) { console.error(e); } });
+}
+dash.onData(draw);
+const named = location.hash.slice(1);
+show(document.getElementById(named) && document.getElementById(named).classList.contains('ifd-page') ? named : 'summary', false);
+})();
+</script>
+</body>
+</html>
