@@ -226,7 +226,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
       </div>
       <div class="ifd-card" id="card-monthly">
         <h3>Incidents by month</h3>
-        <p class="ifd-note">October 2026 is complete (1st through 31st). November and December are projected from 2025. Autumn is the busiest season, which is why a flat run rate understates the year.</p>
+        <p class="ifd-note">October 2026 is complete (1st through 31st). The vertical axis starts at 350, not zero, so month-to-month differences look larger than they are. Autumn is the busiest season, which is why a flat run rate understates the year.</p>
         <div class="ifd-chart" id="ch-monthly" data-source="monthly"></div>
         <div class="ifd-legend" id="lg-monthly"></div>
       </div>
@@ -880,10 +880,10 @@ function drawMonthly() {
   const rows = dash.data('monthly').data;
   const years = [...new Set(rows.map(r => r.year))].sort();
   const H = 230; const [svg, W] = svgFor(el, H);
-  const y = d3.scaleLinear([0, d3.max(rows, r => r.incidents) * 1.1], [H - 26, 12]);
-  const [, lw] = yAxisLeft(svg, y, 4, d3.format(','), 0); svg.selectAll('g').remove();
+  const y = d3.scaleLinear([350, 650], [H - 26, 12]).clamp(true);
+  const [, lw] = yAxisLeft(svg, y, 6, d3.format(','), 0); svg.selectAll('g').remove();
   const l = lw + 10, r = 44;
-  yAxisLeft(svg.append('g').attr('transform', `translate(${l},0)`), y, 4, d3.format(','), W - l - r);
+  yAxisLeft(svg.append('g').attr('transform', `translate(${l},0)`), y, 6, d3.format(','), W - l - r);
   const x = d3.scalePoint(d3.range(1, 13), [l + 8, W - r]);
   const mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const gx = svg.append('g').attr('transform', `translate(0,${H - 26})`).call(d3.axisBottom(x).tickSizeOuter(0).tickFormat((d, i) => (W < 480 && i % 2) ? '' : mn[d - 1])); styleAxis(gx);
