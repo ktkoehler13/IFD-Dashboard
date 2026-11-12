@@ -198,6 +198,12 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:
         <div class="ifd-chart ifd-chart-sm" id="tz-time" data-source="hourly metrics"></div>
         <span class="ifd-more">See Time and overlap →</span>
       </div>
+      <div class="ifd-card ifd-teaser" data-go="types" role="link" tabindex="0" id="tz-types-card" style="grid-column:1/-1">
+        <h3>What the calls were in 2026</h3>
+        <p class="ifd-note">2026 incidents, January 1 – <span data-source="metrics" data-field="value" data-where="metric=data_through">—</span>, by what crews found on scene (NERIS incident group, not the dispatch type). <span id="tz-types-med"></span></p>
+        <div class="ifd-chart" id="tz-types" data-source="groups" style="min-height:220px"></div>
+        <span class="ifd-more">See Call types →</span>
+      </div>
     </div>
     <p class="ifd-note" style="margin-top:var(--cds-gap-md)">The full written findings, including the evidence that weakens the department's case, are on the <a href="#conclusions" class="ifd-golink" data-go="conclusions">Conclusions</a> tab.</p>
   </section>
@@ -1067,6 +1073,25 @@ function drawTeasers() {
     const inWin = (h) => start != null && ((h - start + 24) % 24) < 12;
     barChart(el, rows, { h: 170, x: d => String(d.hour), y: d => d.incidents, color: d => inWin(d.hour) ? BRAND[0] : 'var(--cds-chart-muted)',
       xFmt: d => (+d % 6 ? '' : String(d).padStart(2, '0') + ':00'), tip: d => [['t', String(d.hour).padStart(2, '0') + ':00'], [null, fmtInt(d.incidents) + ' incidents']] });
+  })();
+  // Incident types
+  (() => {
+    const el = document.getElementById('tz-types'); if (fail(el, ['groups']) || !ok('groups')) return;
+    const rows = dash.data('groups').data.slice().sort((a, b) => (a.group === 'Not coded') - (b.group === 'Not coded') || b.incidents - a.incidents);
+    const tot = d3.sum(rows, r => r.incidents);
+    const med = d3.sum(rows.filter(r => r.group.startsWith('Medical')), r => r.incidents);
+    const mEl = document.getElementById('tz-types-med');
+    if (mEl) mEl.textContent = 'Medical calls together (illness plus injury/trauma) were ' + (100 * med / tot).toFixed(1) + '% of all ' + fmtInt(tot) + ' incidents.';
+    const rh = 24, H = rows.length * rh + 6; const [svg, W] = svgFor(el, H);
+    const lw = labelWidth(svg, rows.map(r => r.group)) + 12;
+    const vw = labelWidth(svg, rows.map(r => fmtInt(r.incidents) + ' (' + (100 * r.incidents / tot).toFixed(1) + '%)')) + 10;
+    const x = d3.scaleLinear([0, d3.max(rows, r => r.incidents)], [lw, W - vw]);
+    const g = svg.selectAll('g.row').data(rows).join('g').attr('class', 'row').attr('transform', (d, i) => `translate(0,${i * rh + 3})`);
+    g.append('text').attr('x', lw - 8).attr('y', rh / 2).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(d => d.group);
+    g.append('rect').attr('x', lw).attr('y', 3).attr('height', rh - 8).attr('rx', 3).attr('width', d => Math.max(1, x(d.incidents) - lw)).attr('fill', d => gcolor(d.group))
+      .on('mousemove', (ev, d) => tipShow(ev, [['t', d.group], [null, fmtInt(d.incidents) + ' incidents, ' + (100 * d.incidents / tot).toFixed(1) + '% of 2026']])).on('mouseleave', tipHide);
+    g.append('text').attr('x', d => x(d.incidents) + 6).attr('y', rh / 2).attr('dy', '0.32em').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)')
+      .text(d => fmtInt(d.incidents) + ' (' + (100 * d.incidents / tot).toFixed(1) + '%)');
   })();
 }
 root.addEventListener('click', (ev) => { const t = ev.target.closest('[data-go]'); if (t) { ev.preventDefault(); show(t.dataset.go, true); window.scrollTo({ top: root.querySelector('.ifd-tabs').getBoundingClientRect().top + window.scrollY - 12 }); } });
